@@ -1,0 +1,47 @@
+{
+  "name": "tdd-katas",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.1.1",
+    "@testing-library/user-event": "^14.1.1",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^17.0.27",
+    "@types/react": "^18.0.7",
+    "@types/react-dom": "^18.0.0",
+    "eclint": "^2.8.1",
+    "prettier": "^2.6.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-scripts": "^5.0.1",
+    "typescript": "^4.6.3"
+  },
+  "scripts": {
+    "verify-format": "yarn prettier-check && yarn eclint-check",
+    "fix-format": "yarn prettier-fix && yarn eclint-fix",
+    "eclint-fix": "eclint fix",
+    "eclint-check": "eclint check",
+    "prettier-fix": "prettier --write \"**/**\"",
+    "prettier-check": "prettier --check \"**/**\"",
+    "test": "react-scripts test"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
