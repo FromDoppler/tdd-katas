@@ -2,6 +2,6 @@ export class Greeter {
   constructor() {}
 
   greet(name: string) {
-    return "Hello";
+    return `Hello ${name}`;
   }
 }
