@@ -12,7 +12,7 @@ describe("Greeter.greet", () => {
       currentTime: "2022-04-27T22:00:00.000Z",
     },
   ])(
-    "should return `Good night...` when currentTime is $currentTime",
+    "should return `Good night <name>` when currentTime is $currentTime",
     ({ currentTime }) => {
       // arrange
       const getCurrentDateTime = () => new Date(currentTime);
@@ -22,7 +22,7 @@ describe("Greeter.greet", () => {
       const result = greeter.greet(arbitraryName);
 
       // assert
-      expect(result).toMatch(/^Good\snight/);
+      expect(result).toBe(`Good night ${arbitraryName}`);
     }
   );
 
@@ -34,7 +34,7 @@ describe("Greeter.greet", () => {
       currentTime: "2022-04-27T11:59:59.999Z",
     },
   ])(
-    "should return `Good morning...` when currentTime is $currentTime",
+    "should return `Good morning <name>` when currentTime is $currentTime",
     ({ currentTime }) => {
       // arrange
       const getCurrentDateTime = () => new Date(currentTime);
@@ -44,7 +44,7 @@ describe("Greeter.greet", () => {
       const result = greeter.greet(arbitraryName);
 
       // assert
-      expect(result).toMatch(/^Good\smorning/);
+      expect(result).toBe(`Good morning ${arbitraryName}`);
     }
   );
 
@@ -56,7 +56,7 @@ describe("Greeter.greet", () => {
       currentTime: "2022-04-27T17:59:59.999Z",
     },
   ])(
-    "should return `Hello...` when currentTime is $currentTime",
+    "should return `Hello <name>` when currentTime is $currentTime",
     ({ currentTime }) => {
       // arrange
       const getCurrentDateTime = () => new Date(currentTime);
@@ -66,7 +66,7 @@ describe("Greeter.greet", () => {
       const result = greeter.greet(arbitraryName);
 
       // assert
-      expect(result).toMatch(/^Hello/);
+      expect(result).toBe(`Hello ${arbitraryName}`);
     }
   );
 
@@ -78,7 +78,7 @@ describe("Greeter.greet", () => {
       currentTime: "2022-04-27T21:59:59.999Z",
     },
   ])(
-    "should return `Good evening...` when currentTime is $currentTime",
+    "should return `Good evening <name>` when currentTime is $currentTime",
     ({ currentTime }) => {
       // arrange
       const getCurrentDateTime = () => new Date(currentTime);
@@ -88,33 +88,9 @@ describe("Greeter.greet", () => {
       const result = greeter.greet(arbitraryName);
 
       // assert
-      expect(result).toMatch(/^Good\sevening/);
+      expect(result).toBe(`Good evening ${arbitraryName}`);
     }
   );
-
-  it("should return a message including the name", () => {
-    // arrange
-    const getCurrentDateTime = () => arbitraryDateForSayHello;
-    const greeter = new Greeter({ getCurrentDateTime });
-
-    // act
-    const result = greeter.greet(arbitraryName);
-
-    // assert
-    expect(result).toContain(arbitraryName);
-  });
-
-  it("should return `Hello <name>`", () => {
-    // arrange
-    const getCurrentDateTime = () => arbitraryDateForSayHello;
-    const greeter = new Greeter({ getCurrentDateTime });
-
-    // act
-    const result = greeter.greet(arbitraryName);
-
-    // assert
-    expect(result).toBe(`Hello ${arbitraryName}`);
-  });
 
   it.each([
     { name: " juan " },
