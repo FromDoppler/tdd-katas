@@ -12,7 +12,7 @@ describe("Greeter.greet", () => {
       currentTime: "2022-04-27T22:00:00.000Z",
     },
   ])(
-    "should return a message starting with good night when currentTime is $currentTime",
+    "should return `Good night...` when currentTime is $currentTime",
     ({ currentTime }) => {
       // arrange
       const getCurrentDateTime = () => new Date(currentTime);
@@ -34,7 +34,7 @@ describe("Greeter.greet", () => {
       currentTime: "2022-04-27T11:59:59.999Z",
     },
   ])(
-    "should return a message starting with Good morning when currentTime is $currentTime",
+    "should return `Good morning...` when currentTime is $currentTime",
     ({ currentTime }) => {
       // arrange
       const getCurrentDateTime = () => new Date(currentTime);
@@ -56,7 +56,7 @@ describe("Greeter.greet", () => {
       currentTime: "2022-04-27T17:59:59.999Z",
     },
   ])(
-    "should return a message starting with Hello when currentTime is $currentTime",
+    "should return `Hello...` when currentTime is $currentTime",
     ({ currentTime }) => {
       // arrange
       const getCurrentDateTime = () => new Date(currentTime);
@@ -78,7 +78,7 @@ describe("Greeter.greet", () => {
       currentTime: "2022-04-27T21:59:59.999Z",
     },
   ])(
-    "should return a message starting with Good evening when currentTime is $currentTime",
+    "should return `Good evening...` when currentTime is $currentTime",
     ({ currentTime }) => {
       // arrange
       const getCurrentDateTime = () => new Date(currentTime);
@@ -104,7 +104,7 @@ describe("Greeter.greet", () => {
     expect(result).toContain(arbitraryName);
   });
 
-  it("should return a message saying `Hello <name>`", () => {
+  it("should return `Hello <name>`", () => {
     // arrange
     const getCurrentDateTime = () => arbitraryDateForSayHello;
     const greeter = new Greeter({ getCurrentDateTime });
@@ -121,23 +121,20 @@ describe("Greeter.greet", () => {
     { name: "pedro " },
     { name: " Carlos" },
     { name: " 123 " },
-  ])(
-    "should return a message trimming extra spaces in the name (name: `$name`)",
-    ({ name }) => {
-      // arrange
-      const getCurrentDateTime = () => arbitraryDateForSayHello;
-      const greeter = new Greeter({ getCurrentDateTime });
+  ])("should trim extra spaces in the name (name: `$name`)", ({ name }) => {
+    // arrange
+    const getCurrentDateTime = () => arbitraryDateForSayHello;
+    const greeter = new Greeter({ getCurrentDateTime });
 
-      // act
-      const result = greeter.greet(name);
+    // act
+    const result = greeter.greet(name);
 
-      // assert
-      expect(result).toMatch(/^Hello\s\w+$/);
-    }
-  );
+    // assert
+    expect(result).toMatch(/^Hello\s\w+$/);
+  });
 
   it.each([{ name: "" }, { name: "   " }])(
-    "should return `Hello ` when name is white spaces or empty string (name: `$name`)",
+    "should return `Hello ` when name is empty (name: `$name`)",
     ({ name }) => {
       // arrange
       const getCurrentDateTime = () => arbitraryDateForSayHello;
@@ -159,7 +156,7 @@ describe("Greeter.greet", () => {
     { name: "a", expectedName: "A" },
     { name: "B", expectedName: "B" },
   ])(
-    "should return a message capitalizing the first letter of the name (name: `$name`)",
+    "should capitalize the first letter of the name (name: `$name`)",
     ({ name, expectedName }) => {
       // arrange
       const getCurrentDateTime = () => arbitraryDateForSayHello;
