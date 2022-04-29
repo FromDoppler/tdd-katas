@@ -4,39 +4,13 @@ describe("Greeter.greet", () => {
   it.each([
     {
       currentTime: "2022-04-27T05:59:59.999Z",
-      expectedPrefix: "Good night",
-    },
-    {
-      currentTime: "2022-04-27T06:00:00.000Z",
-      expectedPrefix: "Good morning",
-    },
-    {
-      currentTime: "2022-04-27T11:59:59.999Z",
-      expectedPrefix: "Good morning",
-    },
-    {
-      currentTime: "2022-04-27T12:00:00.000Z",
-      expectedPrefix: "Hello",
-    },
-    {
-      currentTime: "2022-04-27T17:59:59.999Z",
-      expectedPrefix: "Hello",
-    },
-    {
-      currentTime: "2022-04-27T18:00:00.000Z",
-      expectedPrefix: "Good evening",
-    },
-    {
-      currentTime: "2022-04-27T21:59:59.999Z",
-      expectedPrefix: "Good evening",
     },
     {
       currentTime: "2022-04-27T22:00:00.000Z",
-      expectedPrefix: "Good night",
     },
   ])(
-    "should return a message starting with $expectedPrefix when currentTime is $currentTime",
-    ({ currentTime, expectedPrefix }) => {
+    "should return a message starting with good night when currentTime is $currentTime",
+    ({ currentTime }) => {
       // arrange
       const getCurrentDateTime = () => new Date(currentTime);
       const greeter = new Greeter({ getCurrentDateTime });
@@ -45,7 +19,73 @@ describe("Greeter.greet", () => {
       const result = greeter.greet("World");
 
       // assert
-      expect(result).toMatch(new RegExp(`^${expectedPrefix}`));
+      expect(result).toMatch(/^Good\snight/);
+    }
+  );
+
+  it.each([
+    {
+      currentTime: "2022-04-27T06:00:00.000Z",
+    },
+    {
+      currentTime: "2022-04-27T11:59:59.999Z",
+    },
+  ])(
+    "should return a message starting with Good morning when currentTime is $currentTime",
+    ({ currentTime }) => {
+      // arrange
+      const getCurrentDateTime = () => new Date(currentTime);
+      const greeter = new Greeter({ getCurrentDateTime });
+
+      // act
+      const result = greeter.greet("World");
+
+      // assert
+      expect(result).toMatch(/^Good\smorning/);
+    }
+  );
+
+  it.each([
+    {
+      currentTime: "2022-04-27T12:00:00.000Z",
+    },
+    {
+      currentTime: "2022-04-27T17:59:59.999Z",
+    },
+  ])(
+    "should return a message starting with Hello when currentTime is $currentTime",
+    ({ currentTime }) => {
+      // arrange
+      const getCurrentDateTime = () => new Date(currentTime);
+      const greeter = new Greeter({ getCurrentDateTime });
+
+      // act
+      const result = greeter.greet("World");
+
+      // assert
+      expect(result).toMatch(/^Hello/);
+    }
+  );
+
+  it.each([
+    {
+      currentTime: "2022-04-27T18:00:00.000Z",
+    },
+    {
+      currentTime: "2022-04-27T21:59:59.999Z",
+    },
+  ])(
+    "should return a message starting with Good evening when currentTime is $currentTime",
+    ({ currentTime }) => {
+      // arrange
+      const getCurrentDateTime = () => new Date(currentTime);
+      const greeter = new Greeter({ getCurrentDateTime });
+
+      // act
+      const result = greeter.greet("World");
+
+      // assert
+      expect(result).toMatch(/^Good\sevening/);
     }
   );
 
