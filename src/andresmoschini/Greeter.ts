@@ -18,7 +18,11 @@ export class Greeter {
     const currentTime = this._getCurrentDateTime();
     const currentHour = currentTime.getUTCHours();
     const prefix =
-      currentHour >= 6 && currentHour < 12 ? "Good morning" : "Hello";
+      currentHour >= 6 && currentHour < 12
+        ? "Good morning"
+        : currentHour >= 18 && currentHour < 22
+        ? "Good evening"
+        : "Hello";
 
     return `${prefix} ${sanitizedName}`;
   }

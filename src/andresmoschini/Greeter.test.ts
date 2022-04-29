@@ -19,6 +19,18 @@ describe("Greeter.greet", () => {
       expectedPrefix: "Hello",
     },
     {
+      currentTime: "2022-04-27T17:59:59.999Z",
+      expectedPrefix: "Hello",
+    },
+    {
+      currentTime: "2022-04-27T18:00:00.000Z",
+      expectedPrefix: "Good evening",
+    },
+    {
+      currentTime: "2022-04-27T21:59:59.999Z",
+      expectedPrefix: "Good evening",
+    },
+    {
       currentTime: "2022-04-27T22:00:00.000Z",
       expectedPrefix: "Hello",
     },
