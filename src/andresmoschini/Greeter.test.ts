@@ -2,6 +2,7 @@ import { Greeter } from "./Greeter";
 
 describe("Greeter.greet", () => {
   const arbitraryName = "World";
+  const arbitraryDateForSayHello = new Date("2022-04-27T13:00:00.000Z");
 
   it.each([
     {
@@ -93,7 +94,7 @@ describe("Greeter.greet", () => {
 
   it("should return a message including the name", () => {
     // arrange
-    const getCurrentDateTime = () => new Date();
+    const getCurrentDateTime = () => arbitraryDateForSayHello;
     const greeter = new Greeter({ getCurrentDateTime });
 
     // act
@@ -105,7 +106,7 @@ describe("Greeter.greet", () => {
 
   it("should return a message saying `Hello <name>`", () => {
     // arrange
-    const getCurrentDateTime = () => new Date("2022-04-27T13:00:00.000Z");
+    const getCurrentDateTime = () => arbitraryDateForSayHello;
     const greeter = new Greeter({ getCurrentDateTime });
 
     // act
@@ -124,7 +125,7 @@ describe("Greeter.greet", () => {
     "should return a message trimming extra spaces in the name (name: `$name`)",
     ({ name }) => {
       // arrange
-      const getCurrentDateTime = () => new Date("2022-04-27T13:00:00.000Z");
+      const getCurrentDateTime = () => arbitraryDateForSayHello;
       const greeter = new Greeter({ getCurrentDateTime });
 
       // act
@@ -139,7 +140,7 @@ describe("Greeter.greet", () => {
     "should return `Hello ` when name is white spaces or empty string (name: `$name`)",
     ({ name }) => {
       // arrange
-      const getCurrentDateTime = () => new Date("2022-04-27T13:00:00.000Z");
+      const getCurrentDateTime = () => arbitraryDateForSayHello;
       const greeter = new Greeter({ getCurrentDateTime });
 
       // act
@@ -161,7 +162,7 @@ describe("Greeter.greet", () => {
     "should return a message capitalizing the first letter of the name (name: `$name`)",
     ({ name, expectedName }) => {
       // arrange
-      const getCurrentDateTime = () => new Date("2022-04-27T13:00:00.000Z");
+      const getCurrentDateTime = () => arbitraryDateForSayHello;
       const greeter = new Greeter({ getCurrentDateTime });
 
       // act
