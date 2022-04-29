@@ -33,4 +33,18 @@ describe("Greeter.greet", () => {
     // assert
     expect(result).toBe("Hello World");
   });
+
+  it.each([{ name: " juan " }, { name: "pedro " }, { name: " Carlos" }])(
+    "should return a message trimming extra spaces in the name (name: `$name`)",
+    ({ name }) => {
+      // arrange
+      const greeter = new Greeter();
+
+      // act
+      const result = greeter.greet(name);
+
+      // assert
+      expect(result).toMatch(/^Hello\s\w+$/);
+    }
+  );
 });
