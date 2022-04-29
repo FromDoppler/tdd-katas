@@ -13,6 +13,7 @@ export class Greeter {
   }
 
   greet(name: string) {
+    this._log(`Greeting ${name}...`);
     const trimmed = name.trim();
     const first = trimmed.slice(0, 1);
     const rest = trimmed.slice(1);

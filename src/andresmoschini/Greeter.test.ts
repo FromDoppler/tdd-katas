@@ -147,4 +147,25 @@ describe("Greeter.greet", () => {
       expect(result).toBe(`Hello ${expectedName}`);
     }
   );
+
+  it("should log when is called", () => {
+    // arrange
+    const getCurrentDateTime = () => arbitraryDateForSayHello;
+    const log = jest.fn();
+    const greeter = new Greeter({ getCurrentDateTime, log });
+
+    // act
+    greeter.greet("one");
+
+    // assert
+    expect(log).toHaveBeenCalledTimes(1);
+    expect(log).toHaveBeenLastCalledWith(`Greeting one...`);
+
+    // act
+    greeter.greet("two");
+
+    // assert
+    expect(log).toHaveBeenCalledTimes(2);
+    expect(log).toHaveBeenLastCalledWith(`Greeting two...`);
+  });
 });
