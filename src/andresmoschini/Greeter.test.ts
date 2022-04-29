@@ -3,6 +3,7 @@ import { Greeter } from "./Greeter";
 describe("Greeter.greet", () => {
   const arbitraryName = "World";
   const arbitraryDateForSayHello = new Date("2022-04-27T13:00:00.000Z");
+  const noopLog = (_: string) => {};
 
   it.each([
     {
@@ -16,7 +17,7 @@ describe("Greeter.greet", () => {
     ({ currentTime }) => {
       // arrange
       const getCurrentDateTime = () => new Date(currentTime);
-      const greeter = new Greeter({ getCurrentDateTime });
+      const greeter = new Greeter({ getCurrentDateTime, log: noopLog });
 
       // act
       const result = greeter.greet(arbitraryName);
@@ -38,7 +39,7 @@ describe("Greeter.greet", () => {
     ({ currentTime }) => {
       // arrange
       const getCurrentDateTime = () => new Date(currentTime);
-      const greeter = new Greeter({ getCurrentDateTime });
+      const greeter = new Greeter({ getCurrentDateTime, log: noopLog });
 
       // act
       const result = greeter.greet(arbitraryName);
@@ -60,7 +61,7 @@ describe("Greeter.greet", () => {
     ({ currentTime }) => {
       // arrange
       const getCurrentDateTime = () => new Date(currentTime);
-      const greeter = new Greeter({ getCurrentDateTime });
+      const greeter = new Greeter({ getCurrentDateTime, log: noopLog });
 
       // act
       const result = greeter.greet(arbitraryName);
@@ -82,7 +83,7 @@ describe("Greeter.greet", () => {
     ({ currentTime }) => {
       // arrange
       const getCurrentDateTime = () => new Date(currentTime);
-      const greeter = new Greeter({ getCurrentDateTime });
+      const greeter = new Greeter({ getCurrentDateTime, log: noopLog });
 
       // act
       const result = greeter.greet(arbitraryName);
@@ -100,7 +101,7 @@ describe("Greeter.greet", () => {
   ])("should trim extra spaces in the name (name: `$name`)", ({ name }) => {
     // arrange
     const getCurrentDateTime = () => arbitraryDateForSayHello;
-    const greeter = new Greeter({ getCurrentDateTime });
+    const greeter = new Greeter({ getCurrentDateTime, log: noopLog });
 
     // act
     const result = greeter.greet(name);
@@ -114,7 +115,7 @@ describe("Greeter.greet", () => {
     ({ name }) => {
       // arrange
       const getCurrentDateTime = () => arbitraryDateForSayHello;
-      const greeter = new Greeter({ getCurrentDateTime });
+      const greeter = new Greeter({ getCurrentDateTime, log: noopLog });
 
       // act
       const result = greeter.greet(name);
@@ -136,7 +137,7 @@ describe("Greeter.greet", () => {
     ({ name, expectedName }) => {
       // arrange
       const getCurrentDateTime = () => arbitraryDateForSayHello;
-      const greeter = new Greeter({ getCurrentDateTime });
+      const greeter = new Greeter({ getCurrentDateTime, log: noopLog });
 
       // act
       const result = greeter.greet(name);

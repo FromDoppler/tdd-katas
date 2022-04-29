@@ -1,12 +1,15 @@
 interface GreeterDependencies {
   getCurrentDateTime: () => Date;
+  log: (message: string) => void;
 }
 
 export class Greeter {
   private readonly _getCurrentDateTime: () => Date;
+  private readonly _log: (message: string) => void;
 
-  constructor({ getCurrentDateTime }: GreeterDependencies) {
+  constructor({ getCurrentDateTime, log }: GreeterDependencies) {
     this._getCurrentDateTime = getCurrentDateTime;
+    this._log = log;
   }
 
   greet(name: string) {
