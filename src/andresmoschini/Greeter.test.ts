@@ -66,4 +66,26 @@ describe("Greeter.greet", () => {
       expect(result).toMatch(/^Hello\s$/);
     }
   );
+
+  it.each([
+    { name: " juan ", expectedName: "Juan" },
+    { name: "pedRO ", expectedName: "PedRO" },
+    { name: " Carlos", expectedName: "Carlos" },
+    { name: " 123 ", expectedName: "123" },
+    { name: "a", expectedName: "A" },
+    { name: "B", expectedName: "B" },
+  ])(
+    "should return a message capitalizing the first letter of the name (name: `$name`)",
+    ({ name, expectedName }) => {
+      // arrange
+      const greeter = new Greeter();
+
+      // act
+      const result = greeter.greet(name);
+
+      // assert
+      expect(result).toMatch(/^Hello\s[^a-z]\w*$/);
+      expect(result).toBe(`Hello ${expectedName}`);
+    }
+  );
 });
