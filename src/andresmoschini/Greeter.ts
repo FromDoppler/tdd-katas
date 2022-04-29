@@ -22,6 +22,8 @@ export class Greeter {
         ? "Good morning"
         : currentHour >= 18 && currentHour < 22
         ? "Good evening"
+        : currentHour >= 22 || currentHour < 6
+        ? "Good night"
         : "Hello";
 
     return `${prefix} ${sanitizedName}`;

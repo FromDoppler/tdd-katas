@@ -4,7 +4,7 @@ describe("Greeter.greet", () => {
   it.each([
     {
       currentTime: "2022-04-27T05:59:59.999Z",
-      expectedPrefix: "Hello",
+      expectedPrefix: "Good night",
     },
     {
       currentTime: "2022-04-27T06:00:00.000Z",
@@ -32,7 +32,7 @@ describe("Greeter.greet", () => {
     },
     {
       currentTime: "2022-04-27T22:00:00.000Z",
-      expectedPrefix: "Hello",
+      expectedPrefix: "Good night",
     },
   ])(
     "should return a message starting with $expectedPrefix when currentTime is $currentTime",
@@ -63,7 +63,7 @@ describe("Greeter.greet", () => {
 
   it("should return a message saying `Hello <name>`", () => {
     // arrange
-    const getCurrentDateTime = () => new Date("2022-04-27T22:00:00.000Z");
+    const getCurrentDateTime = () => new Date("2022-04-27T13:00:00.000Z");
     const greeter = new Greeter({ getCurrentDateTime });
 
     // act
@@ -82,7 +82,7 @@ describe("Greeter.greet", () => {
     "should return a message trimming extra spaces in the name (name: `$name`)",
     ({ name }) => {
       // arrange
-      const getCurrentDateTime = () => new Date("2022-04-27T22:00:00.000Z");
+      const getCurrentDateTime = () => new Date("2022-04-27T13:00:00.000Z");
       const greeter = new Greeter({ getCurrentDateTime });
 
       // act
@@ -97,7 +97,7 @@ describe("Greeter.greet", () => {
     "should return `Hello ` when name is white spaces or empty string (name: `$name`)",
     ({ name }) => {
       // arrange
-      const getCurrentDateTime = () => new Date("2022-04-27T22:00:00.000Z");
+      const getCurrentDateTime = () => new Date("2022-04-27T13:00:00.000Z");
       const greeter = new Greeter({ getCurrentDateTime });
 
       // act
@@ -119,7 +119,7 @@ describe("Greeter.greet", () => {
     "should return a message capitalizing the first letter of the name (name: `$name`)",
     ({ name, expectedName }) => {
       // arrange
-      const getCurrentDateTime = () => new Date("2022-04-27T22:00:00.000Z");
+      const getCurrentDateTime = () => new Date("2022-04-27T13:00:00.000Z");
       const greeter = new Greeter({ getCurrentDateTime });
 
       // act
