@@ -1,6 +1,8 @@
 import { Greeter } from "./Greeter";
 
 describe("Greeter.greet", () => {
+  const arbitraryName = "World";
+
   it.each([
     {
       currentTime: "2022-04-27T05:59:59.999Z",
@@ -16,7 +18,7 @@ describe("Greeter.greet", () => {
       const greeter = new Greeter({ getCurrentDateTime });
 
       // act
-      const result = greeter.greet("World");
+      const result = greeter.greet(arbitraryName);
 
       // assert
       expect(result).toMatch(/^Good\snight/);
@@ -38,7 +40,7 @@ describe("Greeter.greet", () => {
       const greeter = new Greeter({ getCurrentDateTime });
 
       // act
-      const result = greeter.greet("World");
+      const result = greeter.greet(arbitraryName);
 
       // assert
       expect(result).toMatch(/^Good\smorning/);
@@ -60,7 +62,7 @@ describe("Greeter.greet", () => {
       const greeter = new Greeter({ getCurrentDateTime });
 
       // act
-      const result = greeter.greet("World");
+      const result = greeter.greet(arbitraryName);
 
       // assert
       expect(result).toMatch(/^Hello/);
@@ -82,7 +84,7 @@ describe("Greeter.greet", () => {
       const greeter = new Greeter({ getCurrentDateTime });
 
       // act
-      const result = greeter.greet("World");
+      const result = greeter.greet(arbitraryName);
 
       // assert
       expect(result).toMatch(/^Good\sevening/);
@@ -95,10 +97,10 @@ describe("Greeter.greet", () => {
     const greeter = new Greeter({ getCurrentDateTime });
 
     // act
-    const result = greeter.greet("World");
+    const result = greeter.greet(arbitraryName);
 
     // assert
-    expect(result).toMatch(/World/);
+    expect(result).toContain(arbitraryName);
   });
 
   it("should return a message saying `Hello <name>`", () => {
@@ -107,10 +109,10 @@ describe("Greeter.greet", () => {
     const greeter = new Greeter({ getCurrentDateTime });
 
     // act
-    const result = greeter.greet("World");
+    const result = greeter.greet(arbitraryName);
 
     // assert
-    expect(result).toBe("Hello World");
+    expect(result).toBe(`Hello ${arbitraryName}`);
   });
 
   it.each([
