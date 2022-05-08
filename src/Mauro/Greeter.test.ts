@@ -11,4 +11,21 @@ describe("Greeter.greet", () => {
     // assert
     expect(result).toBe("Hello Mauro");
   });
+
+  it("should trim received name", () => {
+    // arrange
+    const greeter = new Greeter();
+
+    // act
+    const result = greeter.greet("  Mauro  ");
+
+    // assert
+    expect(result).toBe("Hello Mauro");
+
+    // act
+    const result2 = greeter.greet("Mauro  ");
+
+    // assert
+    expect(result2).toBe("Hello Mauro");
+  });
 });
