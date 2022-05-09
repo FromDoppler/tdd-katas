@@ -14,6 +14,8 @@ export class Greeter {
     let greeting = "Hello";
     if (this.time.getTime() >= 6 && this.time.getTime() <= 12) {
       greeting = "Good morning";
+    } else if (this.time.getTime() >= 18 && this.time.getTime() <= 22) {
+      greeting = "Good evening";
     }
     return `${greeting} ${name.trim()}`;
   }
