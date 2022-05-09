@@ -12,8 +12,10 @@ export class Greeter {
     const response =
       getHour >= 6 && getHour <= 12
         ? "Good morning"
-        : getHour >= 18 && getHour <= 22
+        : getHour >= 18 && getHour < 22
         ? "Good evening"
+        : getHour >= 22 || getHour < 6
+        ? "Good night"
         : "Hello";
     return `${response} ${firstCapitalizedLetter}${restTrimmedName}`;
   }

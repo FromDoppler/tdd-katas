@@ -24,4 +24,16 @@ describe("Greeter.greet", () => {
     // assert
     expect(result).toBe("Good evening Mauro");
   });
+
+  it("should return 'Good night <name>' when the time is 22:00-06:00", () => {
+    // arrange
+    const currentTime = new Date("2022-05-08T05:59:00");
+    const greeter = new Greeter(currentTime);
+
+    // act
+    const result = greeter.greet("mauro");
+
+    // assert
+    expect(result).toBe("Good night Mauro");
+  });
 });
