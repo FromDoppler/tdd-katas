@@ -1,6 +1,6 @@
 # tdd-katas
 
-Based on https://github.com/wix/tdd-katas
+Based on <https://github.com/wix/tdd-katas>
 
 ## The Three Rules of TDD
 
