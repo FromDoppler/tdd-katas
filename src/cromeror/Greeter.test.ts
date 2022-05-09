@@ -58,4 +58,15 @@ describe("Greeter.greet", () => {
       // assert
       expect(result).toBe("Good evening Cromeror");
     });
+
+  it
+    .each([22.01, 0, 5.99])
+    ("should return a message with Good night Cromeror", (time) => {
+      // arrange
+      const greeter = new Greeter({ getTime: () => time });
+      // act
+      const result = greeter.greet("Cromeror");
+      // assert
+      expect(result).toBe("Good night Cromeror");
+    });
 });
