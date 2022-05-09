@@ -12,7 +12,7 @@ export class Greeter {
   greet(name: string) {
     name = name.charAt(0).toUpperCase() + name.toLowerCase().slice(1);
     let greeting = "Hello";
-    if(this.time.getTime() >= 6 && this.time.getTime() <= 12){
+    if (this.time.getTime() >= 6 && this.time.getTime() <= 12) {
       greeting = "Good morning";
     }
     return `${greeting} ${name.trim()}`;
