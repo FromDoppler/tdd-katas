@@ -1,15 +1,17 @@
 import { Greeter } from "./Greeter";
 
 describe("Greeter.greet", () => {
-  it("should return a message with Hello name", () => {
-    // arrange
-    const greeter = new Greeter({ getTime: () => 0 });
-    // act
-    const result = greeter.greet("Cromeror");
+  it
+    .each([{ time: 13 }, { time: -1 }, { time: 24.1 }])
+    ("should return a message with Hello name at time $time hour", ({ time }) => {
+      // arrange
+      const greeter = new Greeter({ getTime: () => time });
+      // act
+      const result = greeter.greet("Cromeror");
 
-    // assert
-    expect(result).toBe("Hello Cromeror");
-  });
+      // assert
+      expect(result).toBe("Hello Cromeror");
+    });
 
   it
     .each([
@@ -30,7 +32,7 @@ describe("Greeter.greet", () => {
     .each(["cromeror", "cromEror"])
     ("should return a greeting message with capitalize name", (name) => {
       // arrange
-      const greeter = new Greeter({ getTime: () => 0 });
+      const greeter = new Greeter({ getTime: () => 13 });
       // act
       const result = greeter.greet(name);
       // assert
