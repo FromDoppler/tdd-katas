@@ -1,42 +1,15 @@
 import { Greeter } from "./Greeter";
 
 describe("Greeter.greet", () => {
-  it("should receive a name return a message Hello 'name'", () => {
+  it("should return 'Good morning <name>' when the time is 06:00-12:00", () => {
     // arrange
-    const greeter = new Greeter();
-
-    // act
-    const result = greeter.greet("Mauro");
-
-    // assert
-    expect(result).toBe("Hello Mauro");
-  });
-
-  it("should trim received name", () => {
-    // arrange
-    const greeter = new Greeter();
-
-    // act
-    const result = greeter.greet("  Mauro  ");
-
-    // assert
-    expect(result).toBe("Hello Mauro");
-
-    // act
-    const result2 = greeter.greet("Mauro  ");
-
-    // assert
-    expect(result2).toBe("Hello Mauro");
-  });
-
-  it("should capitalize the first letter of received name", () => {
-    // arrange
-    const greeter = new Greeter();
+    const currentTime = new Date("2022-05-08T06:00:00");
+    const greeter = new Greeter(currentTime);
 
     // act
     const result = greeter.greet("mauro");
 
     // assert
-    expect(result).toBe("Hello Mauro");
+    expect(result).toBe("Good morning Mauro");
   });
 });
