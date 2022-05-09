@@ -9,7 +9,12 @@ export class Greeter {
     const firstCapitalizedLetter = trimmedName.charAt(0).toUpperCase();
     const restTrimmedName = trimmedName.slice(1);
     const getHour = this._getCurrentTime.getHours();
-    const response = getHour >= 6 && getHour <= 12 ? "Good morning" : "Hello";
+    const response =
+      getHour >= 6 && getHour <= 12
+        ? "Good morning"
+        : getHour >= 18 && getHour <= 22
+        ? "Good evening"
+        : "Hello";
     return `${response} ${firstCapitalizedLetter}${restTrimmedName}`;
   }
 }
