@@ -26,4 +26,15 @@ describe("Greeter.greet", () => {
       // assert
       expect(result).toMatch(trimRegex);
     });
+
+  it
+    .each(["cromeror", "cromEror"])
+    ("should return a greeting message with capitalize name", (name) => {
+      // arrange
+      const greeter = new Greeter();
+      // act
+      const result = greeter.greet(name);
+      // assert
+      expect(result).toBe("Hello Cromeror");
+    });
 });
