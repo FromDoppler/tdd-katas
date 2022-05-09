@@ -36,4 +36,17 @@ describe("Greeter.greet", () => {
     // assert
     expect(result).toBe("Good night Mauro");
   });
+
+  it("should log into console when function its called", () => {
+    // arrange
+    const currentTime = new Date("2022-05-08T05:59:00");
+    const greeter = new Greeter(currentTime);
+    console.log = jest.fn();
+
+    // act
+    const result = greeter.greet("mauro");
+
+    // assert
+    expect(console.log).toHaveBeenCalledWith("greet called");
+  });
 });

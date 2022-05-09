@@ -17,6 +17,7 @@ export class Greeter {
         : getHour >= 22 || getHour < 6
         ? "Good night"
         : "Hello";
+    console.log("greet called");
     return `${response} ${firstCapitalizedLetter}${restTrimmedName}`;
   }
 }
