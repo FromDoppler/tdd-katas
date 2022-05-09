@@ -3,6 +3,8 @@ export class Greeter {
 
   greet(name: string) {
     const trimmedName = name.trim();
-    return `Hello ${trimmedName}`;
+    const firstCapitalizedLetter = trimmedName.charAt(0).toUpperCase();
+    const restTrimmedName = trimmedName.slice(1);
+    return `Hello ${firstCapitalizedLetter}${restTrimmedName}`;
   }
 }

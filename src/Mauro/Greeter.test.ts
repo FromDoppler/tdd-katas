@@ -28,4 +28,15 @@ describe("Greeter.greet", () => {
     // assert
     expect(result2).toBe("Hello Mauro");
   });
+
+  it("should capitalize the first letter of received name", () => {
+    // arrange
+    const greeter = new Greeter();
+
+    // act
+    const result = greeter.greet("mauro");
+
+    // assert
+    expect(result).toBe("Hello Mauro");
+  });
 });
