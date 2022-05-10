@@ -4,9 +4,12 @@ interface Time {
 
 export class Greeter {
   private time: Time;
+  private readonly log: (str: string) => void | any;
 
-  constructor(time: Time) {
+  constructor(time: Time, log:(str: string) =>
+    void) {
     this.time = time;
+    this.log = log;
   }
 
   greet(name: string) {
