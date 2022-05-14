@@ -91,4 +91,30 @@ describe("StringCalculator.add", () => {
       expect(result).toEqual(expectedResult);
     }
   );
+
+  it.each([
+    { input: "1,a" },
+    { input: "1\nx" },
+    { input: "10,  " },
+    { input: "1\n  ,3\n4" },
+    { input: "5,  ,7" },
+    { input: "5,6\n  " },
+    { input: " \n6\n7" },
+    { input: "\nx\ny\nz\n" },
+    { input: " ,5,6,7" },
+    { input: ",,\n " },
+  ])(
+    "should return NaN when some values are not parsable ($input)",
+    ({ input }) => {
+      // arrange
+      const expectedResult = NaN;
+      const stringCalculator = new StringCalculator();
+
+      // act
+      const result = stringCalculator.add(input as string);
+
+      // assert
+      expect(result).toEqual(expectedResult);
+    }
+  );
 });
