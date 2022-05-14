@@ -52,9 +52,7 @@ describe("StringCalculator.add", () => {
     { input: 567, expectedResult: 567 },
     { input: "567", expectedResult: 567 },
     { input: "5x6x7x", expectedResult: 5 },
-    { input: "5\n6\n7\n", expectedResult: 5 },
     { input: " 567 ", expectedResult: 567 },
-    { input: "\n5\n6\n7\n", expectedResult: 5 },
   ])(
     "should return the value when the input is parsable as number ($input)",
     ({ input, expectedResult }) => {
@@ -71,12 +69,16 @@ describe("StringCalculator.add", () => {
 
   it.each([
     { input: "1,2", expectedResult: 3 },
+    { input: "1\n2", expectedResult: 3 },
     { input: "10,20", expectedResult: 30 },
     { input: "5,6,7", expectedResult: 18 },
+    { input: "5,6\n7", expectedResult: 18 },
+    { input: "5\n6\n7", expectedResult: 18 },
+    { input: "\n5\n6\n7\n", expectedResult: 18 },
     { input: ",5,6,7", expectedResult: 18 },
-    { input: ",,,", expectedResult: 0 },
+    { input: ",,\n", expectedResult: 0 },
   ])(
-    "should return the sum for comma delimited values ($input)",
+    "should return the sum for delimited values ($input)",
     ({ input, expectedResult }) => {
       // arrange
       const stringCalculator = new StringCalculator();

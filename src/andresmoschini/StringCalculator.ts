@@ -14,12 +14,16 @@ export class StringCalculator {
       return NaN;
     }
 
-    const items = input.split(",");
+    const items = StringCalculator.split(input);
 
     if (items.length === 1) {
       return parseInt(input);
     }
 
     return items.reduce((acc, cur) => acc + this.add(cur), 0);
+  }
+
+  private static split(input: string) {
+    return input.split(",").flatMap((x) => x.split("\n"));
   }
 }
