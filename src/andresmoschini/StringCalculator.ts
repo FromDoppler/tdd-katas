@@ -32,6 +32,14 @@ export class StringCalculator {
       errors.push(`not parsable values: ${nanItems.join(",")}`);
     }
 
+    const negativeItems = parsedItems
+      .filter((x) => x.value < 0)
+      .map((x) => x.value);
+
+    if (negativeItems.length > 0) {
+      errors.push(`negatives not allowed: ${negativeItems.join(",")}`);
+    }
+
     return errors;
   }
 

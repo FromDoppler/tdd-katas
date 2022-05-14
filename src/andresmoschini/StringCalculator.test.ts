@@ -18,6 +18,10 @@ describe("StringCalculator.add", () => {
     { input: "   ", message: "not parsable values:    " },
     { input: "abc", message: "not parsable values: abc" },
     { input: "x5x6x7x", message: "not parsable values: x5x6x7x" },
+    { input: "-x5", message: "not parsable values: -x5" },
+    { input: "-5", message: "negatives not allowed: -5" },
+    { input: "-5x", message: "negatives not allowed: -5" },
+    { input: -5, message: "negatives not allowed: -5" },
   ])(
     "should throw error when the input is not an expected value ($input)",
     ({ input, message }) => {
@@ -107,6 +111,20 @@ describe("StringCalculator.add", () => {
     { input: "\nx\ny\nz\n", message: "not parsable values: x,y,z" },
     { input: " ,5,6,7", message: "not parsable values:  " },
     { input: ",,\n ", message: "not parsable values:  " },
+    { input: "-1,-2", message: "negatives not allowed: -1,-2" },
+    { input: "-1\n-2", message: "negatives not allowed: -1,-2" },
+    { input: "-10,-20", message: "negatives not allowed: -10,-20" },
+    { input: "-1\n2,3\n-4", message: "negatives not allowed: -1,-4" },
+    { input: "5,6,-7", message: "negatives not allowed: -7" },
+    { input: "-5,6\n7", message: "negatives not allowed: -5" },
+    { input: "-5\n6\n-7", message: "negatives not allowed: -5,-7" },
+    { input: "\n-5\n6\n7\n", message: "negatives not allowed: -5" },
+    { input: ",-5,-6,-7", message: "negatives not allowed: -5,-6,-7" },
+    { input: ",-5,-6xxx,-7", message: "negatives not allowed: -5,-6,-7" },
+    {
+      input: ",-5,-6xxx,b,5,-7,8,c",
+      message: "not parsable values: b,c; negatives not allowed: -5,-6,-7",
+    },
   ])(
     "should return an exception when some values are not parsable ($input)",
     ({ input, message }) => {
