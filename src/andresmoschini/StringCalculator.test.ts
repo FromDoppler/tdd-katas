@@ -71,6 +71,7 @@ describe("StringCalculator.add", () => {
     { input: "1,2", expectedResult: 3 },
     { input: "1\n2", expectedResult: 3 },
     { input: "10,20", expectedResult: 30 },
+    { input: "1\n2,3\n4", expectedResult: 10 },
     { input: "5,6,7", expectedResult: 18 },
     { input: "5,6\n7", expectedResult: 18 },
     { input: "5\n6\n7", expectedResult: 18 },
