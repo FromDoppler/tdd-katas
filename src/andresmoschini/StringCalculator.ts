@@ -6,6 +6,6 @@ export class StringCalculator {
       return 0;
     }
 
-    return NaN;
+    return parseInt(input);
   }
 }
