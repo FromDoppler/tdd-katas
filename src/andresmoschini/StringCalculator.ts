@@ -2,6 +2,10 @@ export class StringCalculator {
   constructor() {}
 
   add(input: string) {
-    return 0;
+    if (input === "") {
+      return 0;
+    }
+
+    return NaN;
   }
 }
