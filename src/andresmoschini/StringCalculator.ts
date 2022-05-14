@@ -2,9 +2,11 @@ export class StringCalculator {
   constructor() {}
 
   add(input: string) {
+    const separators = [",", "\n"];
+
     const items =
       typeof input === "string"
-        ? StringCalculator.split(input)
+        ? StringCalculator.split(separators, input)
         : // Not supported by the signature, but it is to make the function robust
           [input];
 
@@ -61,7 +63,11 @@ export class StringCalculator {
     };
   }
 
-  private static split(input: string) {
-    return input.split(",").flatMap((x) => x.split("\n"));
+  private static split(separators: string[], input: string) {
+    let aux = [input];
+    for (const separator of separators) {
+      aux = aux.flatMap((x) => x.split(separator));
+    }
+    return aux;
   }
 }
