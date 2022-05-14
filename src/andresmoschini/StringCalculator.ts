@@ -2,25 +2,29 @@ export class StringCalculator {
   constructor() {}
 
   add(input: string) {
-    if (input === "") {
-      return 0;
-    }
+    const items =
+      typeof input === "string"
+        ? StringCalculator.split(input)
+        : // Not supported by the signature, but it is to make the function robust
+          [input];
 
-    if (typeof input === "number") {
-      return input;
-    }
+    const numbers = items.map(StringCalculator.parseItem);
 
-    if (typeof input !== "string") {
-      return NaN;
-    }
+    return StringCalculator.calculateResult(numbers);
+  }
 
-    const items = StringCalculator.split(input);
+  private static calculateResult(numbers: number[]) {
+    return numbers.reduce((acc, cur) => acc + cur, 0);
+  }
 
-    if (items.length === 1) {
-      return parseInt(input);
-    }
-
-    return items.reduce((acc, cur) => acc + this.add(cur), 0);
+  private static parseItem(item: any) {
+    return item === ""
+      ? 0
+      : typeof item === "number"
+      ? item
+      : typeof item === "string"
+      ? parseInt(item)
+      : NaN;
   }
 
   private static split(input: string) {
