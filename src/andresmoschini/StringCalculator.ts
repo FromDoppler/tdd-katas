@@ -16,7 +16,7 @@ export class StringCalculator {
       throw new Error(errors.join("; "));
     }
 
-    const numbers = parsedItems.map((x) => x.value);
+    const numbers = parsedItems.map((x) => x.value).filter((x) => x <= 1000);
 
     return StringCalculator.calculateResult(numbers);
   }

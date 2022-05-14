@@ -40,7 +40,7 @@ describe("StringCalculator.add", () => {
   it.each([
     { input: "1", expectedResult: 1 },
     { input: "2", expectedResult: 2 },
-    { input: "9337623236", expectedResult: 9337623236 },
+    { input: "933", expectedResult: 933 },
   ])(
     "should return the value when the input is a single number ($input)",
     ({ input, expectedResult }) => {
@@ -137,6 +137,24 @@ describe("StringCalculator.add", () => {
           stringCalculator.add(input as string)
         // assert
       ).toThrowError(message);
+    }
+  );
+
+  it.each([
+    { input: "1000", expectedResult: 1000 },
+    { input: "1001", expectedResult: 0 },
+    { input: "1000,1000,5000,1010,500", expectedResult: 2500 },
+  ])(
+    "should ignore values greater than 1000 ($input)",
+    ({ input, expectedResult }) => {
+      // arrange
+      const stringCalculator = new StringCalculator();
+
+      // act
+      const result = stringCalculator.add(input as string);
+
+      // assert
+      expect(result).toEqual(expectedResult);
     }
   );
 });
