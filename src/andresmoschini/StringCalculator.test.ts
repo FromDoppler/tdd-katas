@@ -14,18 +14,22 @@ describe("StringCalculator.add", () => {
     expect(result).toEqual(expectedResult);
   });
 
-  it.each([{ input: "   " }, { input: "abc" }, { input: "x5x6x7x" }])(
-    "should return NaN when the input is not an expected value ($input)",
-    ({ input }) => {
+  it.each([
+    { input: "   ", message: "not parsable values:    " },
+    { input: "abc", message: "not parsable values: abc" },
+    { input: "x5x6x7x", message: "not parsable values: x5x6x7x" },
+  ])(
+    "should throw error when the input is not an expected value ($input)",
+    ({ input, message }) => {
       // arrange
-      const expectedResult = NaN;
       const stringCalculator = new StringCalculator();
 
-      // act
-      const result = stringCalculator.add(input as string);
-
-      // assert
-      expect(result).toEqual(expectedResult);
+      expect(
+        () =>
+          // act
+          stringCalculator.add(input as string)
+        // assert
+      ).toThrowError(message);
     }
   );
 
@@ -93,28 +97,28 @@ describe("StringCalculator.add", () => {
   );
 
   it.each([
-    { input: "1,a" },
-    { input: "1\nx" },
-    { input: "10,  " },
-    { input: "1\n  ,3\n4" },
-    { input: "5,  ,7" },
-    { input: "5,6\n  " },
-    { input: " \n6\n7" },
-    { input: "\nx\ny\nz\n" },
-    { input: " ,5,6,7" },
-    { input: ",,\n " },
+    { input: "1,a", message: "not parsable values: a" },
+    { input: "1\nx", message: "not parsable values: x" },
+    { input: "10,  ", message: "not parsable values:   " },
+    { input: "1\n  ,3\n4", message: "not parsable values:   " },
+    { input: "5,  ,7", message: "not parsable values:   " },
+    { input: "5,6\n  ", message: "not parsable values:   " },
+    { input: " \n6\n7", message: "not parsable values:  " },
+    { input: "\nx\ny\nz\n", message: "not parsable values: x,y,z" },
+    { input: " ,5,6,7", message: "not parsable values:  " },
+    { input: ",,\n ", message: "not parsable values:  " },
   ])(
-    "should return NaN when some values are not parsable ($input)",
-    ({ input }) => {
+    "should return an exception when some values are not parsable ($input)",
+    ({ input, message }) => {
       // arrange
-      const expectedResult = NaN;
       const stringCalculator = new StringCalculator();
 
-      // act
-      const result = stringCalculator.add(input as string);
-
-      // assert
-      expect(result).toEqual(expectedResult);
+      expect(
+        () =>
+          // act
+          stringCalculator.add(input as string)
+        // assert
+      ).toThrowError(message);
     }
   );
 });

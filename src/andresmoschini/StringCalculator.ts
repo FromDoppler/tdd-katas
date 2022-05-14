@@ -8,9 +8,31 @@ export class StringCalculator {
         : // Not supported by the signature, but it is to make the function robust
           [input];
 
-    const numbers = items.map(StringCalculator.parseItem);
+    const parsedItems = items.map(StringCalculator.parseItem);
+
+    const errors = StringCalculator.validate(parsedItems);
+
+    if (errors.length > 0) {
+      throw new Error(errors.join("; "));
+    }
+
+    const numbers = parsedItems.map((x) => x.value);
 
     return StringCalculator.calculateResult(numbers);
+  }
+
+  private static validate(parsedItems: { original: any; value: number }[]) {
+    const errors = [];
+
+    const nanItems = parsedItems
+      .filter((x) => isNaN(x.value))
+      .map((x) => x.original);
+
+    if (nanItems.length > 0) {
+      errors.push(`not parsable values: ${nanItems.join(",")}`);
+    }
+
+    return errors;
   }
 
   private static calculateResult(numbers: number[]) {
@@ -18,13 +40,17 @@ export class StringCalculator {
   }
 
   private static parseItem(item: any) {
-    return item === ""
-      ? 0
-      : typeof item === "number"
-      ? item
-      : typeof item === "string"
-      ? parseInt(item)
-      : NaN;
+    return {
+      original: item,
+      value:
+        item === ""
+          ? 0
+          : typeof item === "number"
+          ? item
+          : typeof item === "string"
+          ? parseInt(item)
+          : NaN,
+    };
   }
 
   private static split(input: string) {
