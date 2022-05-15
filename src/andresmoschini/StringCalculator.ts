@@ -9,9 +9,9 @@ export class StringCalculator {
 
     const parsedItems = StringCalculator.parse(items);
 
-    const errors = StringCalculator.validate(parsedItems);
+    const { isValid, errors } = StringCalculator.validate(parsedItems);
 
-    if (errors.length > 0) {
+    if (!isValid) {
       throw new Error(errors.join("; "));
     }
 
@@ -20,8 +20,8 @@ export class StringCalculator {
     return StringCalculator.calculateResult(numbers);
   }
 
-  private static validate(parsedItems: { original: any; value: number }[]) {
-    const errors = [];
+  private static validate(parsedItems: { original: string; value: number }[]) {
+    const errors: string[] = [];
 
     const nanItems = parsedItems
       .filter((x) => isNaN(x.value))
@@ -39,7 +39,7 @@ export class StringCalculator {
       errors.push(`negatives not allowed: ${negativeItems.join(",")}`);
     }
 
-    return errors;
+    return { isValid: !errors.length, errors };
   }
 
   private static splitSeparatorsAndData(input: string) {
