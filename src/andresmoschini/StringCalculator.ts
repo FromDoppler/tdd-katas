@@ -2,10 +2,8 @@ export class StringCalculator {
   constructor() {}
 
   add(input: any) {
-    const { separator, data } = StringCalculator.splitSeparatorAndData(
-      `${input}`
-    );
-    const separators = separator ? [separator] : [",", "\n"];
+    const { separators = [",", "\n"], data } =
+      StringCalculator.splitSeparatorsAndData(`${input}`);
 
     const items = StringCalculator.split(separators, data);
 
@@ -44,9 +42,9 @@ export class StringCalculator {
     return errors;
   }
 
-  private static splitSeparatorAndData(input: string) {
+  private static splitSeparatorsAndData(input: string) {
     const [_, separator, data] = /^(?:\/\/([^\n]+)\n)?(.*)$/s.exec(input);
-    return { separator, data };
+    return separator ? { separators: [separator], data } : { data };
   }
 
   private static calculateResult(numbers: number[]) {
