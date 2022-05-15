@@ -7,11 +7,7 @@ export class StringCalculator {
     );
     const separators = separator ? [separator] : [",", "\n"];
 
-    const items =
-      typeof data === "string"
-        ? StringCalculator.split(separators, data)
-        : // Not supported by the signature, but it is to make the function robust
-          [data];
+    const items = StringCalculator.split(separators, data);
 
     const parsedItems = items.map(StringCalculator.parseItem);
 
@@ -49,12 +45,7 @@ export class StringCalculator {
   }
 
   private static splitSeparatorAndData(input: string) {
-    if (typeof input !== "string") {
-      return { separator: null, data: input };
-    }
-
     const [_, separator, data] = /^(?:\/\/([^\n]+)\n)?(.*)$/s.exec(input);
-
     return { separator, data };
   }
 
@@ -62,17 +53,10 @@ export class StringCalculator {
     return numbers.reduce((acc, cur) => acc + cur, 0);
   }
 
-  private static parseItem(item: any) {
+  private static parseItem(item: string) {
     return {
       original: item,
-      value:
-        item === ""
-          ? 0
-          : typeof item === "number"
-          ? item
-          : typeof item === "string"
-          ? parseInt(item)
-          : NaN,
+      value: item === "" ? 0 : parseInt(item),
     };
   }
 
