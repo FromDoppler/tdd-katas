@@ -3,7 +3,7 @@ export class StringCalculator {
 
   add(input: any) {
     const { separators = [",", "\n"], data } =
-      StringCalculator.splitSeparatorsAndData(`${input}`);
+      StringCalculator.splitSeparatorsAndData(String(input));
 
     const items = StringCalculator.split(separators, data);
 

@@ -45,6 +45,10 @@ describe("StringCalculator.add", () => {
     { input: undefined, message: "not parsable values: " },
     {
       input: Symbol("test"),
+      message: "not parsable values: Symbol(test)",
+    },
+    {
+      input: [1, Symbol("test"), 2],
       message: "Cannot convert a Symbol value to a string",
     },
   ])(
