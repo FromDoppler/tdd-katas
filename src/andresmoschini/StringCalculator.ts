@@ -1,8 +1,10 @@
 export class StringCalculator {
   constructor() {}
 
-  add(input: string) {
-    const { separator, data } = StringCalculator.splitSeparatorAndData(input);
+  add(input: any) {
+    const { separator, data } = StringCalculator.splitSeparatorAndData(
+      `${input}`
+    );
     const separators = separator ? [separator] : [",", "\n"];
 
     const items =

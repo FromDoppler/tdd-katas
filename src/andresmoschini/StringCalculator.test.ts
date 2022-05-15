@@ -39,10 +39,8 @@ describe("StringCalculator.add", () => {
 
   it.each([
     { input: {}, message: "not parsable values: [object Object]" },
-    { input: [], message: "not parsable values: " },
     { input: () => {}, message: "not parsable values: () => {}" },
     { input: true, message: "not parsable values: true" },
-    { input: BigInt(7), message: "not parsable values: 7" },
     { input: null, message: "not parsable values: " },
     { input: undefined, message: "not parsable values: " },
     {
@@ -65,6 +63,26 @@ describe("StringCalculator.add", () => {
   );
 
   it.each([
+    { input: 0, expectedResult: 0 },
+    { input: 567, expectedResult: 567 },
+    { input: [], expectedResult: 0 },
+    { input: [1, 2, 3], expectedResult: 6 },
+    { input: BigInt(7), expectedResult: 7 },
+  ])(
+    "should support some edge cases when the input is not a string ($input)",
+    ({ input, expectedResult }) => {
+      // arrange
+      const stringCalculator = new StringCalculator();
+
+      // act
+      const result = stringCalculator.add(input);
+
+      // assert
+      expect(result).toEqual(expectedResult);
+    }
+  );
+
+  it.each([
     { input: "1", expectedResult: 1 },
     { input: "2", expectedResult: 2 },
     { input: "933", expectedResult: 933 },
@@ -83,8 +101,6 @@ describe("StringCalculator.add", () => {
   );
 
   it.each([
-    { input: 0, expectedResult: 0 },
-    { input: 567, expectedResult: 567 },
     { input: "567", expectedResult: 567 },
     { input: "5x6x7x", expectedResult: 5 },
     { input: " 567 ", expectedResult: 567 },
@@ -152,6 +168,8 @@ describe("StringCalculator.add", () => {
       input: ",-5,-6xxx,b,5,-7,8,c",
       message: "not parsable values: b,c; negatives not allowed: -5,-6,-7",
     },
+    { input: [1, 2, -3], message: "negatives not allowed: -3" },
+    { input: BigInt(-7), message: "negatives not allowed: -7" },
   ])(
     "should return an exception when some values are not parsable ($input)",
     ({ input, message }) => {
