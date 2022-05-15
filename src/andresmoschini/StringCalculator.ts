@@ -7,7 +7,7 @@ export class StringCalculator {
 
     const items = StringCalculator.split(separators, data);
 
-    const parsedItems = items.map(StringCalculator.parseItem);
+    const parsedItems = StringCalculator.parse(items);
 
     const errors = StringCalculator.validate(parsedItems);
 
@@ -51,11 +51,11 @@ export class StringCalculator {
     return numbers.reduce((acc, cur) => acc + cur, 0);
   }
 
-  private static parseItem(item: string) {
-    return {
-      original: item,
-      value: item === "" ? 0 : parseInt(item),
-    };
+  private static parse(items: string[]) {
+    return items.map((x) => ({
+      original: x,
+      value: x === "" ? 0 : parseInt(x),
+    }));
   }
 
   private static split(separators: string[], input: string) {
