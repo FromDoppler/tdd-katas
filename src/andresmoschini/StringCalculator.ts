@@ -17,9 +17,7 @@ export class StringCalculator {
 
     const filteredParsedItems = parsedItems.filter((x) => x.value <= 1000);
 
-    const numbers = filteredParsedItems.map((x) => x.value);
-
-    return StringCalculator.calculateResult(numbers);
+    return StringCalculator.sum(filteredParsedItems);
   }
 
   private static validate(parsedItems: { original: string; value: number }[]) {
@@ -49,8 +47,8 @@ export class StringCalculator {
     return separator ? { separators: [separator], data } : { data };
   }
 
-  private static calculateResult(numbers: number[]) {
-    return numbers.reduce((acc, cur) => acc + cur, 0);
+  private static sum(numbers: { original: string; value: number }[]) {
+    return numbers.reduce((acc, cur) => acc + cur.value, 0);
   }
 
   private static parse(items: string[]) {
