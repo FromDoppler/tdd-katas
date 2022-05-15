@@ -157,4 +157,21 @@ describe("StringCalculator.add", () => {
       expect(result).toEqual(expectedResult);
     }
   );
+
+  it.each([
+    { input: "//#\n1", expectedResult: 1 },
+    { input: "//#\n1#2#3#4#5", expectedResult: 15 },
+  ])(
+    "should accept a custom separator ($input)",
+    ({ input, expectedResult }) => {
+      // arrange
+      const stringCalculator = new StringCalculator();
+
+      // act
+      const result = stringCalculator.add(input as string);
+
+      // assert
+      expect(result).toEqual(expectedResult);
+    }
+  );
 });

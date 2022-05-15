@@ -2,13 +2,14 @@ export class StringCalculator {
   constructor() {}
 
   add(input: string) {
-    const separators = [",", "\n"];
+    const { separator, data } = StringCalculator.splitSeparatorAndData(input);
+    const separators = separator ? [separator] : [",", "\n"];
 
     const items =
-      typeof input === "string"
-        ? StringCalculator.split(separators, input)
+      typeof data === "string"
+        ? StringCalculator.split(separators, data)
         : // Not supported by the signature, but it is to make the function robust
-          [input];
+          [data];
 
     const parsedItems = items.map(StringCalculator.parseItem);
 
@@ -43,6 +44,16 @@ export class StringCalculator {
     }
 
     return errors;
+  }
+
+  private static splitSeparatorAndData(input: string) {
+    if (typeof input !== "string") {
+      return { separator: null, data: input };
+    }
+
+    const [_, separator, data] = /^(?:\/\/([^\n]+)\n)?(.*)$/s.exec(input);
+
+    return { separator, data };
   }
 
   private static calculateResult(numbers: number[]) {
