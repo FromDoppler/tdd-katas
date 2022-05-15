@@ -38,6 +38,33 @@ describe("StringCalculator.add", () => {
   );
 
   it.each([
+    { input: {}, message: "not parsable values: [object Object]" },
+    { input: [], message: "not parsable values: " },
+    { input: () => {}, message: "not parsable values: () => {}" },
+    { input: true, message: "not parsable values: true" },
+    { input: BigInt(7), message: "not parsable values: 7" },
+    { input: null, message: "not parsable values: " },
+    { input: undefined, message: "not parsable values: " },
+    {
+      input: Symbol("test"),
+      message: "Cannot convert a Symbol value to a string",
+    },
+  ])(
+    "should throw error when the input is not an expected type ($input)",
+    ({ input, message }) => {
+      // arrange
+      const stringCalculator = new StringCalculator();
+
+      expect(
+        () =>
+          // act
+          stringCalculator.add(input as string)
+        // assert
+      ).toThrowError(message);
+    }
+  );
+
+  it.each([
     { input: "1", expectedResult: 1 },
     { input: "2", expectedResult: 2 },
     { input: "933", expectedResult: 933 },
