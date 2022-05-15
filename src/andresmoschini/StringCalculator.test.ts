@@ -161,6 +161,9 @@ describe("StringCalculator.add", () => {
   it.each([
     { input: "//#\n1", expectedResult: 1 },
     { input: "//#\n1#2#3#4#5", expectedResult: 15 },
+    { input: "//###\n1", expectedResult: 1 },
+    { input: "//xxxx\n1xxxx2xxxx3x4xxxx5", expectedResult: 11 },
+    { input: "//abc12\nabc121abc122abc123abc124abc125", expectedResult: 15 },
   ])(
     "should accept a custom separator ($input)",
     ({ input, expectedResult }) => {
