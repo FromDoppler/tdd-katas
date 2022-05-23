@@ -1,9 +1,14 @@
 export class StringCalculator {
   add = (stringWithNumber: string) => {
-    const matches = stringWithNumber.match(/(\d+)/g);
+    const matches = stringWithNumber.match(/(-\d|\d)+/g);
     let sum = 0;
     matches && matches.forEach((n: string) => {
-      sum += parseInt(n);
+      const nAsNumber = parseInt(n);
+      if (nAsNumber < 0) {
+        throw new Error("The string contains negatives numbers");
+      }
+
+      sum += nAsNumber;
     });
     return sum;
   };
