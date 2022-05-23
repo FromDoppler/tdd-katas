@@ -1,9 +1,18 @@
-const separatorRegex = /\n|,/;
+// const delimiterRegex = /\n|,/;
 
 export class StringCalculator {
   add(input: string) {
     if (this.isEmpty(input)) return 0;
-    const values: string[] = input.split(separatorRegex);
+
+    let delimiterRegex = new RegExp(`\\n|,`);
+    const delimiter = this.findDelimiter(input);
+
+    if (delimiter) {
+      delimiterRegex = new RegExp(`\\n|,|${delimiter}`);
+    }
+
+    const values: string[] = input.split(delimiterRegex);
+
     const parsedInput = this.parseToInt(values);
     this.findNegativeValues(parsedInput);
 
@@ -21,6 +30,14 @@ export class StringCalculator {
     return input
       .map((stringValue: string) => parseInt(stringValue))
       .filter(Number);
+  }
+
+  findDelimiter(input: string): string {
+    const firstLine = input.substring(0, input.indexOf("\n"));
+
+    if (firstLine.substring(0, 2) === "//") return firstLine.substring(2);
+
+    return "";
   }
 
   ignoreGreaterThan(param: number, input: number[]): number[] {

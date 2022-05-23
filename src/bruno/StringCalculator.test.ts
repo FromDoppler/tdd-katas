@@ -125,4 +125,21 @@ describe("StringCalculator", () => {
       expect(result).toEqual(expected);
     }
   );
+
+  it.each([
+    { input: "//#\n1#2", expected: 3, delimiter: "#" },
+    { input: "000\n5,3\n4", expected: 12, delimiter: "" },
+  ])(
+    "should understand defined single char delimiter on first line starting with '//'",
+    ({ input, expected }) => {
+      // arrange
+      const stringCalculator = new StringCalculator();
+
+      // act
+      const result = stringCalculator.add(input);
+
+      // assert
+      expect(result).toEqual(expected);
+    }
+  );
 });
