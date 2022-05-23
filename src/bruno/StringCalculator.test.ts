@@ -19,7 +19,24 @@ describe("StringCalculator", () => {
     { input: "0009", expected: 9 },
     { input: "87776531123", expected: 87776531123 },
   ])(
-    "should return same value when input string is a single number",
+    "should return same value when input string is a single number: $input",
+    ({ input, expected }) => {
+      // arrange
+      const stringCalculator = new StringCalculator();
+
+      // act
+      const result = stringCalculator.add(input);
+
+      // assert
+      expect(result).toEqual(expected);
+    }
+  );
+
+  it.each([
+    { input: "1,2", expected: 3 },
+    { input: "0,5", expected: 5 },
+  ])(
+    "should return the sum of two numbers comma delimited",
     ({ input, expected }) => {
       // arrange
       const stringCalculator = new StringCalculator();
