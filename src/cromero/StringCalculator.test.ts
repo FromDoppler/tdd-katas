@@ -29,4 +29,13 @@ describe("StringCalculator.add", () => {
     // assert
     expect(result).toEqual(sum);
   });
+
+  it("should error with negative number into string", () => {
+    // arrange
+    const stringCalculator = new StringCalculator();
+
+    // assert
+    expect(() => stringCalculator.add("-1,2,-3"))
+      .toThrow("The string contains negatives numbers");
+  });
 });
