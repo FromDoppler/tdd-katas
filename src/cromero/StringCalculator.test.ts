@@ -9,6 +9,20 @@ describe("StringCalculator.add", () => {
     const result = stringCalculator.add("");
 
     // assert
-    expect(result).toEqual(0)
+    expect(result).toEqual(0);
+  });
+
+  it.each([
+    { input: "1", sum: 1 },
+    { input: "2", sum: 2 }
+  ])(`should return $input of $sum string`, ({ input, sum }) => {
+    // arrange
+    const stringCalculator = new StringCalculator();
+
+    // act
+    const result = stringCalculator.add(input);
+
+    // assert
+    expect(result).toEqual(sum);
   });
 });
