@@ -83,4 +83,28 @@ describe("StringCalculator", () => {
       expect(result).toEqual(expected);
     }
   );
+
+  it.each([
+    {
+      input: "-1,2,-3",
+      expected: "'-1,2,-3' => 'negatives not allowed: -1,-3'",
+    },
+    {
+      input: "0\n5,3\n-4",
+      expected: "'5,3,-4' => 'negatives not allowed: -4'",
+    },
+    {
+      input: ",-1,-2\n3\n\n-1000",
+      expected: "'-1,-2,3,-1000' => 'negatives not allowed: -1,-2,-1000'",
+    },
+  ])(
+    "should throw an exception message when values are negative numbers: $input",
+    ({ input, expected }) => {
+      // arrange
+      const stringCalculator = new StringCalculator();
+
+      // assert
+      expect(() => stringCalculator.add(input)).toThrowError(expected);
+    }
+  );
 });
