@@ -1,14 +1,12 @@
-// const delimiterRegex = /\n|,/;
-
 export class StringCalculator {
   add(input: string) {
     if (this.isEmpty(input)) return 0;
 
-    let delimiterRegex = new RegExp(`\\n|,`);
+    let delimiterRegex = new RegExp(`\\n|,`, "g");
     const delimiter = this.findDelimiter(input);
 
     if (delimiter) {
-      delimiterRegex = new RegExp(`\\n|,|${delimiter}`);
+      delimiterRegex = new RegExp(`\\n|,|${delimiter}`, "g");
     }
 
     const values: string[] = input.split(delimiterRegex);

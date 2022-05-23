@@ -127,10 +127,12 @@ describe("StringCalculator", () => {
   );
 
   it.each([
-    { input: "//#\n1#2", expected: 3, delimiter: "#" },
-    { input: "000\n5,3\n4", expected: 12, delimiter: "" },
+    { input: "//#\n1#2", expected: 3 },
+    { input: "//###\n1###2", expected: 3 },
+    { input: "//111\n1112,22221113", expected: 5 },
+    { input: "000\n5,3\n4", expected: 12 },
   ])(
-    "should understand defined single char delimiter on first line starting with '//'",
+    "should understand defined single|multiple char delimiter on first line starting with '//' $input",
     ({ input, expected }) => {
       // arrange
       const stringCalculator = new StringCalculator();
