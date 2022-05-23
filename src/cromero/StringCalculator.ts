@@ -1,5 +1,10 @@
 export class StringCalculator {
   add = (stringWithNumber: string) => {
-    return 0;
+    const matches = stringWithNumber.match(/(\d+)/g);
+    let sum = 0;
+    matches && matches.forEach((n: string) => {
+      sum += parseInt(n);
+    });
+    return sum;
   };
 }
