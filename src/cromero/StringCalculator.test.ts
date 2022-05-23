@@ -38,4 +38,13 @@ describe("StringCalculator.add", () => {
     expect(() => stringCalculator.add("-1,2,-3"))
       .toThrow("The string contains negatives numbers");
   });
+
+  it("should ignore a number greater than 1000", () => {
+    // arrange
+    const stringCalculator = new StringCalculator();
+    // act
+    const result = stringCalculator.add(",1001,10,20");
+    // assert
+    expect(result).toEqual(30);
+  });
 });
