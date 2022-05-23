@@ -48,4 +48,21 @@ describe("StringCalculator", () => {
       expect(result).toEqual(expected);
     }
   );
+
+  it.each([
+    { input: "1\n2", expected: 3 },
+    { input: "0\n5", expected: 5 },
+  ])(
+    "should return the sum of two numbers new line delimited",
+    ({ input, expected }) => {
+      // arrange
+      const stringCalculator = new StringCalculator();
+
+      // act
+      const result = stringCalculator.add(input);
+
+      // assert
+      expect(result).toEqual(expected);
+    }
+  );
 });

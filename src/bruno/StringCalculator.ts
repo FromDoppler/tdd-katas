@@ -8,6 +8,12 @@ export class StringCalculator {
       return numbers[0] + numbers[1];
     }
 
+    if (this.isNewLineDelimited(input)) {
+      const values = this.splitWithSeparator(input, "\n");
+      const numbers = this.parseToInt(values);
+      return numbers[0] + numbers[1];
+    }
+
     return parseInt(input);
   }
 
@@ -17,6 +23,12 @@ export class StringCalculator {
 
   isCommaDelimited(input: string): boolean {
     const separator = ",";
+    const values = this.splitWithSeparator(input, separator);
+    return values.length > 1 ? true : false;
+  }
+
+  isNewLineDelimited(input: string): boolean {
+    const separator = "\n";
     const values = this.splitWithSeparator(input, separator);
     return values.length > 1 ? true : false;
   }
