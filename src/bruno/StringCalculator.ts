@@ -2,17 +2,15 @@ export class StringCalculator {
   add(input: string) {
     if (this.isEmpty(input)) return 0;
 
-    let delimiterRegex = new RegExp(`\\n|,`, "g");
     const delimiter = this.findDelimiter(input);
-
-    if (delimiter) {
-      delimiterRegex = new RegExp(`\\n|,|${delimiter}`, "g");
-    }
+    const delimiterRegex = delimiter
+      ? new RegExp(`\\n|,|${delimiter}`, "g")
+      : new RegExp(`\\n|,`, "g");
 
     const values: string[] = input.split(delimiterRegex);
 
     const parsedInput = this.parseToInt(values);
-    this.findNegativeValues(parsedInput);
+    this.validateNoNegativeValues(parsedInput);
 
     return this.ignoreGreaterThan(1000, parsedInput).reduce(
       (sum, number) => sum + number,
@@ -42,7 +40,7 @@ export class StringCalculator {
     return input.filter((value) => value <= param);
   }
 
-  findNegativeValues(input: number[]) {
+  validateNoNegativeValues(input: number[]) {
     const negatives = input.filter((value) => value < 0);
 
     if (negatives.length > 0)
