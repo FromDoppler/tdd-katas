@@ -43,6 +43,11 @@ describe(generate.name, () => {
       expectedResult: [2, 2, 2],
     },
     {
+      scenario: "supported value",
+      n: 9,
+      expectedResult: [3, 3],
+    },
+    {
       scenario: "unsupported value yet",
       n: 1234568789,
       expectedResult: [1234568789],
@@ -50,7 +55,7 @@ describe(generate.name, () => {
     {
       scenario: "unsupported value yet",
       n: 30030,
-      expectedResult: [2, 15015],
+      expectedResult: [2, 3, 5005],
     },
     {
       scenario: "unsupported type",
