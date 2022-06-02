@@ -1,8 +1,8 @@
 export function generate(n: number) {
   const factors = [];
 
-  if (n === 2) {
-    factors.push(2);
+  if (n > 1) {
+    factors.push(n);
   }
 
   return factors;
