@@ -38,4 +38,15 @@ describe(generate.name, () => {
     // Assert
     expect(result).toEqual([]);
   });
+
+  it("should return [2] when n is 2", () => {
+    // Arrange
+    const n = 2;
+
+    // Act
+    const result = generate(n);
+
+    // Assert
+    expect(result).toEqual([2]);
+  });
 });
