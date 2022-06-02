@@ -1,8 +1,10 @@
 export function generate(n: number) {
   const factors = [];
 
-  if (n > 1) {
-    factors.push(n);
+  while (n > 1) {
+    const factor = n % 2 == 0 ? 2 : n;
+    factors.push(factor);
+    n = n / factor;
   }
 
   return factors;

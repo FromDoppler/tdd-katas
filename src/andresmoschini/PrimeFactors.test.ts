@@ -78,4 +78,15 @@ describe(generate.name, () => {
     // Assert
     expect(result).toEqual([3]);
   });
+
+  it("should return [2,2] when n is 4", () => {
+    // Arrange
+    const n = 4;
+
+    // Act
+    const result = generate(n);
+
+    // Assert
+    expect(result).toEqual([2, 2]);
+  });
 });
