@@ -12,7 +12,7 @@ export function generate(n: number) {
 
 function searchOneFactor(n: number) {
   let factor = 2;
-  while (factor <= n && n % factor !== 0) {
+  while (n % factor !== 0) {
     factor++;
   }
   return factor;
