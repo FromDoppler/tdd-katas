@@ -48,14 +48,19 @@ describe(generate.name, () => {
       expectedResult: [3, 3],
     },
     {
-      scenario: "unsupported value yet",
+      scenario: "supported value",
+      n: 4620,
+      expectedResult: [2, 2, 3, 5, 7, 11],
+    },
+    {
+      scenario: "supported value (it is a prime number 🤦‍♂️)",
       n: 1234568789,
       expectedResult: [1234568789],
     },
     {
-      scenario: "unsupported value yet",
+      scenario: "supported value",
       n: 30030,
-      expectedResult: [2, 3, 5005],
+      expectedResult: [2, 3, 5, 7, 11, 13],
     },
     {
       scenario: "unsupported type",
