@@ -2,13 +2,19 @@ export function generate(n: number) {
   const factors = [];
 
   while (n > 1) {
-    let factor = 2;
-    while (factor <= n && n % factor !== 0) {
-      factor++;
-    }
+    const factor = searchOneFactor(n);
     factors.push(factor);
     n = n / factor;
   }
 
   return factors;
 }
+
+function searchOneFactor(n: number) {
+  let factor = 2;
+  while (factor <= n && n % factor !== 0) {
+    factor++;
+  }
+  return factor;
+}
+
