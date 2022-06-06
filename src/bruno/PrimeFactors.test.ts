@@ -4,8 +4,10 @@ describe("PrimeFactors", () => {
   it("should return [] when input value is 1", () => {
     // Arrange
     const input = 1;
+
     // Act
     const result = generate(input);
+
     // Assert
     expect(result).toEqual([]);
   });
@@ -15,8 +17,20 @@ describe("PrimeFactors", () => {
     ({ input }) => {
       // Act
       const result = generate(input);
+
       // Assert
       expect(result).toEqual([input]);
     }
   );
+
+  it("should return [2,2] when input value is 4", () => {
+    // Arrange
+    const input = 4;
+
+    // Act
+    const result = generate(input);
+
+    // Assert
+    expect(result).toEqual([2, 2]);
+  });
 });
