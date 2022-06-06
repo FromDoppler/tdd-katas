@@ -5,7 +5,8 @@ describe("PrimeFactors.generate", () => {
     .each([
       { number: 1, expected: [] },
       { number: 2, expected: [2] },
-      { number: 3, expected: [3] }
+      { number: 3, expected: [3] },
+      { number: 4, expected: [2, 2] }
     ])
     ("should return $expected when the number is $number", ({ number, expected }) => {
       const primeFactors = generate(number);
