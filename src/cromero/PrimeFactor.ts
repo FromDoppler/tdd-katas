@@ -1,25 +1,33 @@
-export const generate = (input: number) => {
-  if (input === 1) {
-    return [];
+export const generate = (integer: number, current = []): number[] => {
+  if (integer === 1) {
+    return current;
   }
-  if (input === 2) {
-    return [2];
+
+  if (isPrime(integer)) {
+    return [...current, integer];
   }
-  if (isPrime(input)) {
-    return [input];
-  }
+
+  const dividers = getDividers(integer);
+  const currentDivider = dividers[1];
+  const residue = integer / currentDivider;
+  return generate(residue, [...current, currentDivider]);
 };
 
-const isPrime = (integer: number): boolean => {
-  const multiples = [];
-  if (integer === 1 || integer === 2) {
-    return false;
-  }
+const getDividers = (integer): number[] => {
+  const dividers = [];
 
   for (let i = 1; i <= integer; i++) {
     if (integer % i === 0) {
-      multiples.push(i);
+      dividers.push(i);
     }
   }
-  return multiples.length === 2;
+  return dividers;
+};
+
+const isPrime = (integer: number): boolean => {
+  if (integer === 1 || integer === 2) {
+    return false;
+  }
+  const dividers = getDividers(integer);
+  return dividers.length === 2;
 };
