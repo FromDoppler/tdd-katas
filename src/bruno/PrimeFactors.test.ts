@@ -10,12 +10,13 @@ describe("PrimeFactors", () => {
     expect(result).toEqual([]);
   });
 
-  it("should return [2] when input value is 2", () => {
-    // Arrange
-    const input = 2;
-    // Act
-    const result = generate(input);
-    // Assert
-    expect(result).toEqual([2]);
-  });
+  it.each([{ input: 2 }, { input: 3 }])(
+    "should return [$input] when input value is $input",
+    ({ input }) => {
+      // Act
+      const result = generate(input);
+      // Assert
+      expect(result).toEqual([input]);
+    }
+  );
 });
