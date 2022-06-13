@@ -11,6 +11,5 @@ export const generate = (n: number) => {
     divisor++;
   }
 
-  console.log(primeFactors);
   return primeFactors;
 };
