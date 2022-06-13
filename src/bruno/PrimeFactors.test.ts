@@ -99,4 +99,15 @@ describe("PrimeFactors", () => {
     // Assert
     expect(result).toEqual([2, 2, 3, 5, 7, 11]);
   });
+
+  it("should return [] when input value is < 0", () => {
+    // Arrange
+    const input = -1;
+
+    // Act
+    const result = generate(input);
+
+    // Assert
+    expect(result).toEqual([]);
+  });
 });
