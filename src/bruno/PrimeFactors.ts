@@ -1,14 +1,16 @@
 export const generate = (n: number) => {
   const primeFactors: number[] = [];
 
-  if (n > 1) {
-    while (n % 2 === 0) {
-      primeFactors.push(2);
-      n = n / 2;
-    }
+  let divisor = 2;
 
-    n > 1 && primeFactors.push(n);
+  while (n > 1) {
+    while (n % divisor === 0) {
+      primeFactors.push(divisor);
+      n = n / divisor;
+    }
+    divisor++;
   }
 
+  console.log(primeFactors);
   return primeFactors;
 };
