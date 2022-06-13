@@ -1,6 +1,10 @@
 export const generate = (n: number) => {
   const primeFactors: number[] = [];
 
+  if (!Number.isInteger(n)) {
+    return [];
+  }
+
   let divisor = 2;
 
   while (n > 1) {

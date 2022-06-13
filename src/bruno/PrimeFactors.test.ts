@@ -110,4 +110,15 @@ describe("PrimeFactors", () => {
     // Assert
     expect(result).toEqual([]);
   });
+
+  it("should return [] when input value is not Integer", () => {
+    // Arrange
+    const input = 2000.9;
+
+    // Act
+    const result = generate(input);
+
+    // Assert
+    expect(result).toEqual([]);
+  });
 });
