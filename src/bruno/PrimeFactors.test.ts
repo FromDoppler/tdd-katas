@@ -66,4 +66,15 @@ describe("PrimeFactors", () => {
     // Assert
     expect(result).toEqual([7]);
   });
+
+  it("should return [2,2,2] when input value is 8", () => {
+    // Arrange
+    const input = 8;
+
+    // Act
+    const result = generate(input);
+
+    // Assert
+    expect(result).toEqual([2, 2, 2]);
+  });
 });
