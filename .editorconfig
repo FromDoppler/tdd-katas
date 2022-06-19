@@ -17,7 +17,9 @@ block_comment_end = */
 max_line_length = 130
 
 [*.md]
+indent_style = unset
 indent_size = unset
+max_line_length = unset
 
 # Unset for binary and generated files
 [{**.svg,**.png,**/obj/**,**/bin/**,.vscode/**,**/Properties/launchSettings.json,yarn.lock,.doppler-ci,build/**,LICENSE}]
