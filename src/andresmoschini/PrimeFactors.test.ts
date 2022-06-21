@@ -53,11 +53,6 @@ describe(generate.name, () => {
       expectedResult: [2, 2, 3, 5, 7, 11],
     },
     {
-      scenario: "supported value (it is a prime number 🤦‍♂️)",
-      n: 1234568789,
-      expectedResult: [1234568789],
-    },
-    {
       scenario: "supported value",
       n: 30030,
       expectedResult: [2, 3, 5, 7, 11, 13],
