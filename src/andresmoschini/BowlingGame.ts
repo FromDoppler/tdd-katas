@@ -1,6 +1,9 @@
 export class BowlingGame {
-  roll(pins: number) {}
+  score: number = 0;
+  roll(pins: number) {
+    this.score += pins;
+  }
   getScore(): number {
-    return 0;
+    return this.score;
   }
 }

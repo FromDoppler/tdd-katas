@@ -28,8 +28,23 @@ describe(BowlingGame.name, () => {
     // Assert
     expect(game.getScore()).toBe(expectedScore);
   });
-});
 
+  it("should return 20 when all roles downs 1 pine", () => {
+    // Arrange
+    const game = new BowlingGame();
+    const rollsQty = 20;
+    const downPines = 1;
+    const expectedScore = 20;
+
+    // Act
+    range(rollsQty).forEach((i) => {
+      game.roll(downPines);
+    });
+
+    // Assert
+    expect(game.getScore()).toBe(expectedScore);
+  });
+});
 
 function range(size: number, startAt = 0) {
   return [...Array(size).keys()].map((i) => i + startAt);
