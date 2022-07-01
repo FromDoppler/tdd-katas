@@ -1,4 +1,5 @@
 import { BowlingGame } from "./BowlingGame";
+import { range } from "./utils";
 
 describe(BowlingGame.name, () => {
   it.each([{ functionName: "roll" }, { functionName: "getScore" }])(
@@ -45,7 +46,3 @@ describe(BowlingGame.name, () => {
     expect(game.getScore()).toBe(expectedScore);
   });
 });
-
-function range(size: number, startAt = 0) {
-  return [...Array(size).keys()].map((i) => i + startAt);
-}
