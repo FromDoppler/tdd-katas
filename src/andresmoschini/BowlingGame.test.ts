@@ -62,4 +62,21 @@ describe(BowlingGame.name, () => {
     // Assert
     expect(game.getScore()).toBe(16);
   });
+
+  it("should support one strike", () => {
+    // Arrange
+    const game = new BowlingGame();
+
+    // Act
+    game.roll(10); // strike
+    game.roll(3);
+    game.roll(4);
+
+    range(16).forEach(() => {
+      game.roll(0);
+    });
+
+    // Assert
+    expect(game.getScore()).toBe(24);
+  });
 });
