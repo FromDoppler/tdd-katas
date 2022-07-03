@@ -21,8 +21,7 @@ export class BowlingGame {
   roll(pins: number) {
     this.rolls[this.currentRoll++] = pins;
     // if we rolls all pins at the first shot, we should move to the next frame
-    if (pins === TOTAL_PINS) {
-      // TODO: it will fail if we roll 10 in the second roll
+    if (pins === TOTAL_PINS && this.currentRoll % 2 === 1) {
       this.currentRoll++;
     }
   }

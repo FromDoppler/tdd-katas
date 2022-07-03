@@ -79,4 +79,22 @@ describe(BowlingGame.name, () => {
     // Assert
     expect(game.getScore()).toBe(24);
   });
+
+  it("should support one spare after zero", () => {
+    // Arrange
+    const game = new BowlingGame();
+
+    // Act
+    game.roll(0);
+    game.roll(10); // spare
+    game.roll(3);
+    game.roll(4);
+
+    range(16).forEach(() => {
+      game.roll(0);
+    });
+
+    // Assert
+    expect(game.getScore()).toBe(20);
+  });
 });
