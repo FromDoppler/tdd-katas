@@ -45,4 +45,21 @@ describe(BowlingGame.name, () => {
     // Assert
     expect(game.getScore()).toBe(expectedScore);
   });
+
+  it("should support one spare", () => {
+    // Arrange
+    const game = new BowlingGame();
+
+    // Act
+    game.roll(5);
+    game.roll(5); // spare
+    game.roll(3);
+
+    range(17).forEach(() => {
+      game.roll(0);
+    });
+
+    // Assert
+    expect(game.getScore()).toBe(16);
+  });
 });

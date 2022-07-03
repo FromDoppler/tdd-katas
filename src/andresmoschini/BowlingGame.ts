@@ -17,9 +17,14 @@ export class BowlingGame {
     range(FRAMES_IN_A_GAME).forEach((frameIndex) => {
       const roll1Index = frameIndex * 2;
       const roll2Index = roll1Index + 1;
-
-      const frameScore =
-        this.rolls[roll1Index] + this.rolls[roll2Index];
+      const nextFrameRoll1Index = roll2Index + 1;
+      const isSpare =
+        this.rolls[roll1Index] + this.rolls[roll2Index] === TOTAL_PINS;
+      const frameScore = isSpare
+        ? this.rolls[roll1Index] +
+          this.rolls[roll2Index] +
+          this.rolls[nextFrameRoll1Index]
+        : this.rolls[roll1Index] + this.rolls[roll2Index];
 
       score += frameScore;
     });
