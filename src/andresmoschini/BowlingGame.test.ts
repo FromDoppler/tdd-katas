@@ -1,5 +1,5 @@
 import { BowlingGame } from "./BowlingGame";
-import { range } from "./utils";
+import { range, repeat } from "./utils";
 
 describe(BowlingGame.name, () => {
   it.each([{ functionName: "roll" }, { functionName: "getScore" }])(
@@ -14,87 +14,46 @@ describe(BowlingGame.name, () => {
     }
   );
 
-  it("should return 0 for a gutter game", () => {
-    // Arrange
-    const game = new BowlingGame();
-    const rollsQty = 20;
-    const gutterPines = 0;
-    const expectedScore = 0;
+  it.each([
+    {
+      description: "gutter",
+      rolls: [...repeat(20, 0)],
+      expectedScore: 0,
+    },
+    {
+      description: "all 1s",
+      rolls: [...repeat(20, 1)],
+      expectedScore: 20,
+    },
+    {
+      description: "with spare",
+      rolls: [5, 5 /* spare */, 3, ...repeat(17, 0)],
+      expectedScore: 16,
+    },
+    {
+      description: "with strike",
+      rolls: [10 /* strike */, 3, 4, ...repeat(16, 0)],
+      expectedScore: 24,
+    },
+    {
+      description: "with spare after 0",
+      rolls: [0, 10 /* spare */, 3, 4, ...repeat(16, 0)],
+      expectedScore: 20,
+    },
+  ])(
+    "getScore should return $expectedScore for a $description game",
+    ({ rolls, expectedScore }) => {
+      // Arrange
+      const game = new BowlingGame();
+      for (const roll of rolls) {
+        game.roll(roll);
+      }
 
-    // Act
-    range(rollsQty).forEach((i) => {
-      game.roll(gutterPines);
-    });
+      // Act
+      const result = game.getScore();
 
-    // Assert
-    expect(game.getScore()).toBe(expectedScore);
-  });
-
-  it("should return 20 when all roles downs 1 pine", () => {
-    // Arrange
-    const game = new BowlingGame();
-    const rollsQty = 20;
-    const downPines = 1;
-    const expectedScore = 20;
-
-    // Act
-    range(rollsQty).forEach((i) => {
-      game.roll(downPines);
-    });
-
-    // Assert
-    expect(game.getScore()).toBe(expectedScore);
-  });
-
-  it("should support one spare", () => {
-    // Arrange
-    const game = new BowlingGame();
-
-    // Act
-    game.roll(5);
-    game.roll(5); // spare
-    game.roll(3);
-
-    range(17).forEach(() => {
-      game.roll(0);
-    });
-
-    // Assert
-    expect(game.getScore()).toBe(16);
-  });
-
-  it("should support one strike", () => {
-    // Arrange
-    const game = new BowlingGame();
-
-    // Act
-    game.roll(10); // strike
-    game.roll(3);
-    game.roll(4);
-
-    range(16).forEach(() => {
-      game.roll(0);
-    });
-
-    // Assert
-    expect(game.getScore()).toBe(24);
-  });
-
-  it("should support one spare after zero", () => {
-    // Arrange
-    const game = new BowlingGame();
-
-    // Act
-    game.roll(0);
-    game.roll(10); // spare
-    game.roll(3);
-    game.roll(4);
-
-    range(16).forEach(() => {
-      game.roll(0);
-    });
-
-    // Assert
-    expect(game.getScore()).toBe(20);
-  });
+      // Assert
+      expect(result).toBe(expectedScore);
+    }
+  );
 });
