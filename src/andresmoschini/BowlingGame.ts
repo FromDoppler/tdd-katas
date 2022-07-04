@@ -5,13 +5,14 @@ const FRAMES_IN_A_GAME = 10;
 const MAX_ROLLS_IN_A_GAME = FRAMES_IN_A_GAME * 2 + 1;
 
 function calculateFrameScore({ roll1, roll2, nextFrameRoll1, nextFrameRoll2 }) {
+  const sumInFrame = roll1 + roll2;
   const isStrike = roll1 === TOTAL_PINS;
-  const isSpare = !isStrike && roll1 + roll2 === TOTAL_PINS;
+  const isSpare = !isStrike && sumInFrame === TOTAL_PINS;
   return isStrike
-    ? roll1 + roll2 + nextFrameRoll1 + nextFrameRoll2
+    ? sumInFrame + nextFrameRoll1 + nextFrameRoll2
     : isSpare
-    ? roll1 + roll2 + nextFrameRoll1
-    : roll1 + roll2;
+    ? sumInFrame + nextFrameRoll1
+    : sumInFrame;
 }
 
 export class BowlingGame {
