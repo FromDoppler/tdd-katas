@@ -1,4 +1,4 @@
-import { range, sum } from "./utils";
+import { range, repeat, sum } from "./utils";
 
 const TOTAL_PINS = 10;
 const FRAMES_IN_A_GAME = 10;
@@ -17,7 +17,7 @@ function calculateFrameScore({ roll1, roll2, nextFrameRoll1, nextFrameRoll2 }) {
 
 export class BowlingGame {
   private currentRoll: number = 0;
-  private rolls: number[] = range(MAX_ROLLS_IN_A_GAME).map(() => 0);
+  private rolls: number[] = repeat(MAX_ROLLS_IN_A_GAME, 0);
 
   roll(pins: number) {
     this.rolls[this.currentRoll++] = pins;
