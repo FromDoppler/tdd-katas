@@ -9,4 +9,13 @@ describe(BowlingGame.name, function () {
     const score = game.getScore();
     expect(score).toEqual(10);
   });
+
+  it("should calculate score with strikes bonus", function() {
+    const game = new BowlingGame();
+    game.roll(5);
+    game.roll(10);
+    game.roll(5);
+    const score = game.getScore();
+    expect(score).toEqual(25);
+  });
 });
