@@ -1,25 +1,58 @@
+interface Frame {
+  attempts: number;
+  score: number;
+  bonus: "strike" | "spare" | "none";
+}
+
 export class BowlingGame {
-  private rolls = [];
-  private isStrikeBonus = false;
+  private currentFrame: Frame;
+  private frames: Frame[] = [];
+
+  constructor() {
+    this.currentFrame = { attempts: 0, bonus: "none", score: 0 };
+  }
 
   roll(pin): void {
-    if (this.rolls.length === 10) {
+    this.currentFrame.score += pin;
+
+    if (this.currentFrame.score === 10 && this.currentFrame.attempts === 0) {
+      this.currentFrame.bonus = "strike";
+      this.endFrame();
       return;
     }
-    if (this.isStrikeBonus) {
-      this.rolls.push(pin * 2);
-      this.isStrikeBonus = false;
+
+    if (this.currentFrame.score === 10 && this.currentFrame.attempts === 1) {
+      this.currentFrame.bonus = "spare";
+      this.endFrame();
       return;
     }
-    this.isStrikeBonus = pin === 10;
-    this.rolls.push(pin);
+
+    if (this.currentFrame.attempts === 1) {
+      this.endFrame();
+      return;
+    }
+
+    this.currentFrame.attempts++;
   }
 
   getScore(): number {
     let score = 0;
-    this.rolls.forEach((pins) => {
-      score += pins;
-    });
+    for (let i = 0; i < this.frames.length; i++) {
+      const current = this.frames[i];
+      const hasStrikeBonus =
+        i > 0 ? this.frames[i - 1].bonus === "strike" : false;
+      if (hasStrikeBonus) {
+        score += current.score * 2;
+        break;
+      }
+
+      score += current.score;
+    }
     return score;
+  }
+
+  private endFrame() {
+    this.frames.push(this.currentFrame);
+    this.currentFrame = { attempts: 0, bonus: "none", score: 0 };
   }
 }
