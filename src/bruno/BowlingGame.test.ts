@@ -29,7 +29,7 @@ describe("BowlingGame", () => {
     expect(bowlingGame.score()).toEqual(0);
   });
 
-  it("should test a all ones", () => {
+  it("should test an all ones game", () => {
     // Act
     rollMany(20, 1);
 
@@ -37,7 +37,7 @@ describe("BowlingGame", () => {
     expect(bowlingGame.score()).toEqual(20);
   });
 
-  it("should test one spare", () => {
+  it("should test one spare game", () => {
     // Act
     rollSpare();
     bowlingGame.roll(3);
@@ -47,7 +47,7 @@ describe("BowlingGame", () => {
     expect(bowlingGame.score()).toEqual(16);
   });
 
-  it("should test one strike", () => {
+  it("should test one strike game", () => {
     // Act
     rollStrike();
     bowlingGame.roll(3);
@@ -56,5 +56,13 @@ describe("BowlingGame", () => {
 
     // Assert
     expect(bowlingGame.score()).toEqual(24);
+  });
+
+  it("should test perfect game", () => {
+    // Act
+    rollMany(12, 10);
+
+    // Assert
+    expect(bowlingGame.score()).toEqual(300);
   });
 });
