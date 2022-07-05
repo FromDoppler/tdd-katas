@@ -11,8 +11,13 @@ const rollSpare = () => {
   bowlingGame.roll(5);
 };
 
+const rollStrike = () => {
+  bowlingGame.roll(10);
+};
+
 let bowlingGame: BowlingGame;
 beforeEach(() => {
+  // Arrange
   bowlingGame = new BowlingGame();
 });
 
@@ -33,14 +38,23 @@ describe("BowlingGame", () => {
   });
 
   it("should test one spare", () => {
-    // Arrange
+    // Act
     rollSpare();
     bowlingGame.roll(3);
-
-    // Act
     rollMany(17, 0);
 
     // Assert
     expect(bowlingGame.score()).toEqual(16);
+  });
+
+  it("should test one strike", () => {
+    // Act
+    rollStrike();
+    bowlingGame.roll(3);
+    bowlingGame.roll(4);
+    rollMany(16, 0);
+
+    // Assert
+    expect(bowlingGame.score()).toEqual(24);
   });
 });
