@@ -6,6 +6,11 @@ const rollMany = (n: number, pins: number) => {
   }
 };
 
+const rollSpare = () => {
+  bowlingGame.roll(5);
+  bowlingGame.roll(5);
+};
+
 let bowlingGame: BowlingGame;
 beforeEach(() => {
   bowlingGame = new BowlingGame();
@@ -25,5 +30,17 @@ describe("BowlingGame", () => {
 
     // Assert
     expect(bowlingGame.score()).toEqual(20);
+  });
+
+  it("should test one spare", () => {
+    // Arrange
+    rollSpare();
+    bowlingGame.roll(3);
+
+    // Act
+    rollMany(17, 0);
+
+    // Assert
+    expect(bowlingGame.score()).toEqual(16);
   });
 });
