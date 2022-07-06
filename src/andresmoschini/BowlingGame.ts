@@ -2,49 +2,85 @@ import { range, repeat, sum } from "./utils";
 
 const TOTAL_PINS = 10;
 const FRAMES_IN_A_GAME = 10;
-const MAX_ROLLS_IN_A_GAME = FRAMES_IN_A_GAME * 2 + 1;
+//const MAX_ROLLS_IN_A_GAME = FRAMES_IN_A_GAME * 2 + 1;
 
-function calculateFrameScore({ roll1, roll2, nextFrameRoll1, nextFrameRoll2 }) {
-  const sumInFrame = roll1 + roll2;
-  const isStrike = roll1 === TOTAL_PINS;
-  const isSpare = !isStrike && sumInFrame === TOTAL_PINS;
-  return isStrike
-    ? sumInFrame + nextFrameRoll1 + nextFrameRoll2
-    : isSpare
-    ? sumInFrame + nextFrameRoll1
-    : sumInFrame;
-}
+class Frame {
+  readonly rolls: number[] = [];
+  nextFrame: Frame | null = null;
 
-export class BowlingGame {
-  private currentRoll: number = 0;
-  private rolls: number[] = repeat(MAX_ROLLS_IN_A_GAME, 0);
+  constructor(public readonly frameNumber: number) {}
 
-  roll(pins: number) {
-    this.rolls[this.currentRoll++] = pins;
-    // if we rolls all pins at the first shot, we should move to the next frame
-    if (pins === TOTAL_PINS && this.currentRoll % 2 === 1) {
-      this.currentRoll++;
+  roll(roll: number): Frame {
+    if (this.isComplete() && this.isLastFrame()) {
+      throw new Error("Cannot roll when the game is over");
+    } else if (this.isComplete()) {
+      return (this.nextFrame = new Frame(this.frameNumber + 1).roll(roll));
+    } else {
+      this.rolls.push(roll);
+      return this;
     }
   }
 
-  getFrameRelatedValues(frameIndex: number) {
-    const roll1Index = frameIndex * 2;
-    const roll2Index = roll1Index + 1;
-    const nextFrameRoll1Index = roll2Index + 1;
-    const nextFrameRoll2Index = nextFrameRoll1Index + 1;
-    return {
-      roll1: this.rolls[roll1Index],
-      roll2: this.rolls[roll2Index],
-      nextFrameRoll1: this.rolls[nextFrameRoll1Index],
-      nextFrameRoll2: this.rolls[nextFrameRoll2Index],
-    };
+  isComplete(): boolean {
+    return this.isStrike() || this.rolls.length === 2; // TODO: last frame?
   }
 
   getScore(): number {
-    return sum(
-      range(FRAMES_IN_A_GAME)
-        .map((frameIndex) => this.getFrameRelatedValues(frameIndex))
-        .map(calculateFrameScore)
+    const sumOfRolls = sum(this.rolls);
+    return this.isStrike()
+      ? TOTAL_PINS + this.getStrikeBonus()
+      : this.isSpare()
+      ? TOTAL_PINS + this.getSpareBonus()
+      : sumOfRolls;
+  }
+
+  getSpareBonus(): number {
+    return this.nextFrame?.getOneRollScore() ?? 0;
+  }
+
+  getStrikeBonus(): number {
+    return this.nextFrame?.getTwoRollScore() ?? 0;
+  }
+
+  getOneRollScore(): number {
+    return this.rolls[0];
+  }
+
+  getTwoRollScore(): number {
+    return (
+      this.getOneRollScore() +
+      (this.isStrike() ? this.getSpareBonus() : this.rolls[1])
     );
+  }
+
+  isStrike(): boolean {
+    return this.rolls[0] === TOTAL_PINS;
+  }
+
+  isSpare(): boolean {
+    return this.rolls[0] + this.rolls[1] === TOTAL_PINS;
+  }
+
+  isLastFrame(): boolean {
+    return this.frameNumber === FRAMES_IN_A_GAME;
+  }
+
+  getGameScore(): number {
+    return (
+      this.getScore() + (this.nextFrame ? this.nextFrame.getGameScore() : 0)
+    );
+  }
+}
+
+export class BowlingGame {
+  private firstFrame: Frame = new Frame(1);
+  private lastFrame: Frame = this.firstFrame;
+
+  roll(pins: number) {
+    this.lastFrame = this.lastFrame.roll(pins);
+  }
+
+  getScore(): number {
+    return this.firstFrame.getGameScore();
   }
 }

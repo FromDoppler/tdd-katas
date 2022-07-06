@@ -17,6 +17,31 @@ describe(BowlingGame.name, () => {
   it.each([
     {
       description: "gutter",
+      rolls: [...repeat(21, 0)],
+    },
+    // {
+    //   description: "perfect",
+    //   rolls: [...repeat(13, 10)]
+    // },
+  ])(
+    "getScore should throw error when there are too much rolls in a $description game",
+    ({ rolls }) => {
+      // Arrange
+      const game = new BowlingGame();
+
+      const act = () => {
+        for (const roll of rolls) {
+          game.roll(roll);
+        }
+      };
+
+      expect(act).toThrowError("Cannot roll when the game is over");
+    }
+  );
+
+  it.each([
+    {
+      description: "gutter",
       rolls: [...repeat(20, 0)],
       expectedScore: 0,
     },
@@ -40,12 +65,33 @@ describe(BowlingGame.name, () => {
       rolls: [0, 10 /* spare */, 3, 4, ...repeat(16, 0)],
       expectedScore: 20,
     },
+    {
+      description: "perfect",
+      rolls: [...repeat(9, 10)],
+      expectedScore: 300,
+    },
+    // {
+    //   description: "gutter with a last spare",
+    //   rolls: [...repeat(18, 0), 0, 10, 10],
+    //   expectedScore: 20,
+    // },
+    // {
+    //   description: "gutter with a last strike",
+    //   rolls: [...repeat(18, 0), 10, 10, 0],
+    //   expectedScore: 10,
+    // },
+    // {
+    //   description: "x",
+    //   rolls: [1, 1],
+    //   expectedScore: 10,
+    // },
   ])(
     "getScore should return $expectedScore for a $description game",
     ({ rolls, expectedScore }) => {
       // Arrange
       const game = new BowlingGame();
       for (const roll of rolls) {
+        //console.debug((game as any).firstFrame);
         game.roll(roll);
       }
 
@@ -53,7 +99,10 @@ describe(BowlingGame.name, () => {
       const result = game.getScore();
 
       // Assert
+
+      //expect((game as any).rolls).toBe([]);
       expect(result).toBe(expectedScore);
     }
   );
+
 });
