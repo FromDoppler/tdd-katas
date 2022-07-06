@@ -28,4 +28,14 @@ describe(BowlingGame.name, function () {
     const score = game.getScore();
     expect(score).toEqual(20);
   });
+
+  it("should get a extra rol in the 10th frame", function () {
+    const game = new BowlingGame();
+    game.roll(10);
+    for (let i = 0; i < 19; i++) {
+      game.roll(1);
+    }
+    const score = game.getScore();
+    expect(score).toEqual(31);
+  });
 });
