@@ -1,7 +1,9 @@
 interface Frame {
   attempts: number;
-  score: number;
   bonus: "strike" | "spare" | "none";
+  totalScore: number;
+  score1: number;
+  score2?: number;
 }
 
 export class BowlingGame {
@@ -9,25 +11,37 @@ export class BowlingGame {
   private frames: Frame[] = [];
 
   constructor() {
-    this.currentFrame = { attempts: 0, bonus: "none", score: 0 };
+    this.currentFrame = {
+      attempts: 1,
+      bonus: "none",
+      score1: 0,
+      totalScore: 0,
+    };
   }
 
   roll(pin): void {
-    this.currentFrame.score += pin;
+    this.currentFrame.totalScore += pin;
+    this.currentFrame["score" + this.currentFrame.attempts] = pin;
 
-    if (this.currentFrame.score === 10 && this.currentFrame.attempts === 0) {
+    if (
+      this.currentFrame.totalScore === 10 &&
+      this.currentFrame.attempts === 1
+    ) {
       this.currentFrame.bonus = "strike";
       this.endFrame();
       return;
     }
 
-    if (this.currentFrame.score === 10 && this.currentFrame.attempts === 1) {
+    if (
+      this.currentFrame.totalScore === 10 &&
+      this.currentFrame.attempts === 2
+    ) {
       this.currentFrame.bonus = "spare";
       this.endFrame();
       return;
     }
 
-    if (this.currentFrame.attempts === 1) {
+    if (this.currentFrame.attempts === 2) {
       this.endFrame();
       return;
     }
@@ -42,17 +56,29 @@ export class BowlingGame {
       const hasStrikeBonus =
         i > 0 ? this.frames[i - 1].bonus === "strike" : false;
       if (hasStrikeBonus) {
-        score += current.score * 2;
+        score += current.totalScore * 2;
         break;
       }
 
-      score += current.score;
+      const hasSpareBonus =
+        i > 0 ? this.frames[i - 1].bonus === "spare" : false;
+      if (hasSpareBonus) {
+        score += current.score1 + current.totalScore;
+        break;
+      }
+
+      score += current.totalScore;
     }
     return score;
   }
 
   private endFrame() {
     this.frames.push(this.currentFrame);
-    this.currentFrame = { attempts: 0, bonus: "none", score: 0 };
+    this.currentFrame = {
+      attempts: 1,
+      bonus: "none",
+      score1: 0,
+      totalScore: 0,
+    };
   }
 }
