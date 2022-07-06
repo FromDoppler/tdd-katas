@@ -6,6 +6,9 @@ export class Frame {
   rolls: number[] = [];
 
   getScore() {
+    if (!this.isComplete()) {
+      throw new Error("frame is not complete");
+    }
     return sum(this.rolls);
   }
 
@@ -14,6 +17,9 @@ export class Frame {
   }
 
   roll(roll: number) {
+    if (this.isComplete()) {
+      throw new Error("frame is complete");
+    }
     this.rolls.push(roll);
   }
 }
