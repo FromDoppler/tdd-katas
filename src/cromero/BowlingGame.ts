@@ -46,6 +46,7 @@ export class BowlingGame {
 
     if (this.frames.length === 10 && this.hasExtraRol) {
       this.endFrame();
+      return;
     }
 
     if (this.currentFrame.attempts === 2) {
