@@ -27,6 +27,19 @@ describe(BowlingGame.name, () => {
 
     // Assert
     expect(game.getScore()).toBe(expectedScore);
+  });
+
+  it("should return 20 when all roles downs 1 pine", () => {
+    // Arrange
+    const game = new BowlingGame();
+    const rollsQty = 20;
+    const downPines = 1;
+    const expectedScore = 20;
+
+    // Act
+    for (let i = 0; i < rollsQty; i++) {
+      game.roll(downPines);
+    }
 
     // Assert
     expect(game.getScore()).toBe(expectedScore);
