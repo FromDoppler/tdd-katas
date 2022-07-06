@@ -13,35 +13,31 @@ describe(BowlingGame.name, () => {
     }
   );
 
-  it("should return 0 for a gutter game", () => {
-    // Arrange
-    const game = new BowlingGame();
-    const rollsQty = 20;
-    const gutterPines = 0;
-    const expectedScore = 0;
+  test.each([
+    {
+      description: "gutter game",
+      rolls: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      expectedScore: 0,
+    },
+    {
+      description: "all ones game",
+      rolls: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      expectedScore: 20,
+    },
+  ])(
+    "getScore() should calculate the right score for a valid game ($description)",
+    ({ rolls, expectedScore }) => {
+      // Arrange
+      const game = new BowlingGame();
+      for (const roll of rolls) {
+        game.roll(roll);
+      }
 
-    // Act
-    for (let i = 0; i < rollsQty; i++) {
-      game.roll(gutterPines);
+      // Act
+      const score = game.getScore();
+
+      // Assert
+      expect(score).toBe(expectedScore);
     }
-
-    // Assert
-    expect(game.getScore()).toBe(expectedScore);
-  });
-
-  it("should return 20 when all roles downs 1 pine", () => {
-    // Arrange
-    const game = new BowlingGame();
-    const rollsQty = 20;
-    const downPines = 1;
-    const expectedScore = 20;
-
-    // Act
-    for (let i = 0; i < rollsQty; i++) {
-      game.roll(downPines);
-    }
-
-    // Assert
-    expect(game.getScore()).toBe(expectedScore);
-  });
+  );
 });
