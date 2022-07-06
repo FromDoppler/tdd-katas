@@ -23,6 +23,10 @@ export class BowlingGame {
   private frames = createCollection(FRAMES_COUNT, () => new Frame());
 
   roll(pins: number) {
+    if (this.currentFrameIndex >= FRAMES_COUNT) {
+      throw new Error("game is complete");
+    }
+
     const currentFrame = this.frames[this.currentFrameIndex];
 
     currentFrame.roll(pins);

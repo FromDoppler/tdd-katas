@@ -66,4 +66,25 @@ describe(BowlingGame.name, () => {
       expect(act).toThrowError(/game is not complete/i);
     }
   );
+
+  test.each([
+    {
+      description: "long gutter game",
+      rolls: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    },
+  ])("roll() should fail in a complete game ($description)", ({ rolls }) => {
+    // Arrange
+    const game = new BowlingGame();
+    const lastRoll = rolls.pop()!;
+
+    for (const roll of rolls) {
+      game.roll(roll);
+    }
+
+    // Act
+    const act = () => game.roll(lastRoll);
+
+    // Assert
+    expect(act).toThrowError(/game is complete/i);
+  });
 });
