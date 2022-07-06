@@ -18,4 +18,14 @@ describe(BowlingGame.name, function () {
     const score = game.getScore();
     expect(score).toEqual(26);
   });
+
+  it("should calculate score with spare bonus", function () {
+    const game = new BowlingGame();
+    game.roll(5);
+    game.roll(5);
+    game.roll(3);
+    game.roll(4);
+    const score = game.getScore();
+    expect(score).toEqual(20);
+  });
 });
