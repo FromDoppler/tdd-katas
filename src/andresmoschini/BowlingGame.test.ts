@@ -40,4 +40,30 @@ describe(BowlingGame.name, () => {
       expect(score).toBe(expectedScore);
     }
   );
+
+  test.each([
+    {
+      description: "empty game",
+      rolls: [],
+    },
+    {
+      description: "19 rolls",
+      rolls: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    },
+  ])(
+    "getScore() should require a complete game ($description)",
+    ({ rolls }) => {
+      // Arrange
+      const game = new BowlingGame();
+      for (const roll of rolls) {
+        game.roll(roll);
+      }
+
+      // Act
+      const act = () => game.getScore();
+
+      // Assert
+      expect(act).toThrowError(/game is not complete/i);
+    }
+  );
 });
