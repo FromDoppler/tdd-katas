@@ -9,6 +9,7 @@ interface Frame {
 export class BowlingGame {
   private currentFrame: Frame;
   private frames: Frame[] = [];
+  private hasExtraRol = false;
 
   constructor() {
     this.currentFrame = {
@@ -28,6 +29,7 @@ export class BowlingGame {
       this.currentFrame.attempts === 1
     ) {
       this.currentFrame.bonus = "strike";
+      this.hasExtraRol = true;
       this.endFrame();
       return;
     }
@@ -37,8 +39,13 @@ export class BowlingGame {
       this.currentFrame.attempts === 2
     ) {
       this.currentFrame.bonus = "spare";
+      this.hasExtraRol = true;
       this.endFrame();
       return;
+    }
+
+    if (this.frames.length === 10 && this.hasExtraRol) {
+      this.endFrame();
     }
 
     if (this.currentFrame.attempts === 2) {
@@ -57,14 +64,14 @@ export class BowlingGame {
         i > 0 ? this.frames[i - 1].bonus === "strike" : false;
       if (hasStrikeBonus) {
         score += current.totalScore * 2;
-        break;
+        continue;
       }
 
       const hasSpareBonus =
         i > 0 ? this.frames[i - 1].bonus === "spare" : false;
       if (hasSpareBonus) {
         score += current.score1 + current.totalScore;
-        break;
+        continue;
       }
 
       score += current.totalScore;
