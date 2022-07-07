@@ -183,7 +183,7 @@ describe(Frame.name, () => {
 
       // Act
       const score = frame.getScore({
-        nextFrame: undefined,
+        nextFrame: new Frame(),
         nextNextFrame: undefined,
       });
 
@@ -212,7 +212,7 @@ describe(Frame.name, () => {
 
       // Act
       const act = () =>
-        frame.getScore({ nextFrame: undefined, nextNextFrame: undefined });
+        frame.getScore({ nextFrame: new Frame(), nextNextFrame: undefined });
 
       // Assert
       expect(act).toThrowError(/frame is not complete/i);

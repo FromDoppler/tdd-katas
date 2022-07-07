@@ -10,7 +10,7 @@ export class Frame {
     nextFrame,
     nextNextFrame,
   }: {
-    nextFrame: Frame | undefined;
+    nextFrame: Frame;
     nextNextFrame: Frame | undefined;
   }) {
     if (!this.isComplete()) {
@@ -20,12 +20,12 @@ export class Frame {
 
     // TODO: encapsulate nextFrame and nextNextFrame rolls
     const bonus =
-      this.isStrike() && nextFrame!.isStrike()
+      this.isStrike() && nextFrame.isStrike()
         ? PINES_COUNT + nextNextFrame!.rolls[0]
         : this.isStrike()
-        ? sum(nextFrame!.rolls)
+        ? sum(nextFrame.rolls)
         : this.isSpare()
-        ? nextFrame!.rolls[0]
+        ? nextFrame.rolls[0]
         : 0;
 
     return sumOfRolls + bonus;
