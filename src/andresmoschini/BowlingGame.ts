@@ -32,11 +32,13 @@ export class Frame {
   }
 
   isSpare() {
-    return this.rolls.length === 2 && sum(this.rolls) === PINES_COUNT;
+    return (
+      this.rolls.length >= 2 && this.rolls[0] + this.rolls[1] === PINES_COUNT
+    );
   }
 
   isStrike() {
-    return this.rolls.length === 1 && this.rolls[0] === PINES_COUNT;
+    return this.rolls.length >= 1 && this.rolls[0] === PINES_COUNT;
   }
 
   isComplete() {
@@ -51,9 +53,29 @@ export class Frame {
   }
 }
 
+export class LastFrame extends Frame {
+  isComplete(): boolean {
+    return (
+      this.rolls.length === 3 || (!this.isSpare() && this.rolls.length === 2)
+    );
+  }
+
+  getScore() {
+    if (!this.isComplete()) {
+      throw new Error("frame is not complete");
+    }
+    const sumOfRolls = sum(this.rolls);
+
+    return sumOfRolls;
+  }
+}
+
 export class BowlingGame {
   private currentFrameIndex = 0;
-  private frames = createCollection(FRAMES_COUNT, () => new Frame());
+  private frames = [
+    ...createCollection(FRAMES_COUNT - 1, () => new Frame()),
+    new LastFrame(),
+  ];
 
   roll(pins: number) {
     if (this.currentFrameIndex >= FRAMES_COUNT) {
