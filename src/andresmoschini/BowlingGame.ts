@@ -4,7 +4,7 @@ const PINES_COUNT = 10;
 const FRAMES_COUNT = 10;
 
 abstract class Frame {
-  rolls: number[] = [];
+  protected rolls: number[] = [];
 
   abstract getScore({
     nextFrame,
@@ -72,7 +72,7 @@ export class StandardFrame extends Frame {
 
   getTwoRollsBonus({ nextFrame }: { nextFrame: Frame | undefined }) {
     return this.isStrike()
-      ? PINES_COUNT + nextFrame!.rolls[0]
+      ? PINES_COUNT + nextFrame!.getOneRollBonus()
       : this.rolls[0] + this.rolls[1];
   }
 
