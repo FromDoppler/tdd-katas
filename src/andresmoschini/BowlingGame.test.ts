@@ -61,6 +61,27 @@ describe(BowlingGame.name, () => {
       //                                                            ^^^^^^^ last frame
       expectedScore: 11,
     },
+    {
+      description: "last frame strike",
+      rolls: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 1, 1],
+      //                                                            ^^ strike
+      //                                                            ^^^^^^^^ last frame
+      expectedScore: 12,
+    },
+    {
+      description: "last frame double strike",
+      rolls: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 1],
+      //                                                            ^^  ^^ strikes
+      //                                                            ^^^^^^^^^ last frame
+      expectedScore: 21,
+    },
+    {
+      description: "last frame triple strike",
+      rolls: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10],
+      //                                                            ^^  ^^  ^^ strikes
+      //                                                            ^^^^^^^^^^ last frame
+      expectedScore: 30,
+    },
   ])(
     "getScore() should calculate the right score for a valid game ($description)",
     ({ rolls, expectedScore }) => {

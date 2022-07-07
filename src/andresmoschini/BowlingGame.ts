@@ -56,7 +56,8 @@ export class Frame {
 export class LastFrame extends Frame {
   isComplete(): boolean {
     return (
-      this.rolls.length === 3 || (!this.isSpare() && this.rolls.length === 2)
+      this.rolls.length === 3 ||
+      (!this.isSpare() && !this.isStrike() && this.rolls.length === 2)
     );
   }
 
