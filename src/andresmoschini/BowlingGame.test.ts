@@ -24,6 +24,25 @@ describe(BowlingGame.name, () => {
       rolls: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       expectedScore: 20,
     },
+    {
+      description: "game with a strike",
+      rolls: [10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      //      ^^ strike
+      expectedScore: 10,
+    },
+    {
+      description: "game with spaced strikes",
+      rolls: [10, 0, 0, 10, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      //      ^^        ^^        ^^ strikes
+      expectedScore: 30,
+    },
+    // TODO: support this scenario
+    // {
+    //   description: "game successive strikes",
+    //   rolls: [10, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    //   //      ^^  ^^  ^^ strikes
+    //   expectedScore: 60,
+    // },
   ])(
     "getScore() should calculate the right score for a valid game ($description)",
     ({ rolls, expectedScore }) => {

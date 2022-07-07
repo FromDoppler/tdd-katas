@@ -1,5 +1,6 @@
 import { createCollection, sum } from "./utils";
 
+const PINES_COUNT = 10;
 const FRAMES_COUNT = 10;
 
 export class Frame {
@@ -12,8 +13,12 @@ export class Frame {
     return sum(this.rolls);
   }
 
+  isStrike() {
+    return this.rolls.length === 1 && this.rolls[0] === PINES_COUNT;
+  }
+
   isComplete() {
-    return this.rolls.length === 2;
+    return this.isStrike() || this.rolls.length === 2;
   }
 
   roll(roll: number) {
