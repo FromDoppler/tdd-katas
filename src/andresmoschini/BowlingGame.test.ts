@@ -42,13 +42,18 @@ describe(BowlingGame.name, () => {
       //      ^^        ^^        ^^ strikes
       expectedScore: 30,
     },
-    // TODO: support this scenario
-    // {
-    //   description: "game successive strikes",
-    //   rolls: [10, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    //   //      ^^  ^^  ^^ strikes
-    //   expectedScore: 60,
-    // },
+    {
+      description: "game with strike and rolls",
+      rolls: [10, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      //      ^^  strikes
+      expectedScore: 14,
+    },
+    {
+      description: "game with successive strikes",
+      rolls: [10, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      //      ^^  ^^  ^^ strikes
+      expectedScore: 60,
+    },
   ])(
     "getScore() should calculate the right score for a valid game ($description)",
     ({ rolls, expectedScore }) => {
@@ -149,7 +154,10 @@ describe(Frame.name, () => {
       }
 
       // Act
-      const score = frame.getScore({ nextFrame: undefined });
+      const score = frame.getScore({
+        nextFrame: undefined,
+        nextNextFrame: undefined,
+      });
 
       // Assert
       expect(score).toBe(expectedScore);
@@ -175,7 +183,8 @@ describe(Frame.name, () => {
       }
 
       // Act
-      const act = () => frame.getScore({ nextFrame: undefined });
+      const act = () =>
+        frame.getScore({ nextFrame: undefined, nextNextFrame: undefined });
 
       // Assert
       expect(act).toThrowError(/frame is not complete/i);

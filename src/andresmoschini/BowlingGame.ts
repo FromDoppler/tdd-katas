@@ -6,14 +6,27 @@ const FRAMES_COUNT = 10;
 export class Frame {
   rolls: number[] = [];
 
-  getScore({ nextFrame }: { nextFrame: Frame | undefined }) {
+  getScore({
+    nextFrame,
+    nextNextFrame,
+  }: {
+    nextFrame: Frame | undefined;
+    nextNextFrame: Frame | undefined;
+  }) {
     if (!this.isComplete()) {
       throw new Error("frame is not complete");
     }
     const sumOfRolls = sum(this.rolls);
 
-    // TODO: encapsulate nextframe rolls
-    const bonus = this.isSpare() ? nextFrame!.rolls[0] : 0;
+    // TODO: encapsulate nextFrame and nextNextFrame rolls
+    const bonus =
+      this.isStrike() && nextFrame!.isStrike()
+        ? PINES_COUNT + nextNextFrame!.rolls[0]
+        : this.isStrike()
+        ? sum(nextFrame!.rolls)
+        : this.isSpare()
+        ? nextFrame!.rolls[0]
+        : 0;
 
     return sumOfRolls + bonus;
   }
@@ -64,7 +77,8 @@ export class BowlingGame {
     for (let i = 0; i < FRAMES_COUNT; i++) {
       const frame = this.frames[i];
       const nextFrame = this.frames[i + 1];
-      score += frame.getScore({ nextFrame });
+      const nextNextFrame = this.frames[i + 2];
+      score += frame.getScore({ nextFrame, nextNextFrame });
     }
 
     return score;
