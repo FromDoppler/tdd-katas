@@ -18,17 +18,23 @@ export class Frame {
     }
     const sumOfRolls = sum(this.rolls);
 
-    // TODO: encapsulate nextFrame and nextNextFrame rolls
-    const bonus =
-      this.isStrike() && nextFrame.isStrike()
-        ? PINES_COUNT + nextNextFrame!.rolls[0]
-        : this.isStrike()
-        ? sum(nextFrame.rolls)
-        : this.isSpare()
-        ? nextFrame.rolls[0]
-        : 0;
+    const bonus = this.isStrike()
+      ? nextFrame.getTwoRollsBonus({ nextFrame: nextNextFrame })
+      : this.isSpare()
+      ? nextFrame.getOneRollBonus()
+      : 0;
 
     return sumOfRolls + bonus;
+  }
+
+  getTwoRollsBonus({ nextFrame }: { nextFrame: Frame | undefined }) {
+    return this.isStrike()
+      ? PINES_COUNT + nextFrame!.rolls[0]
+      : this.rolls[0] + this.rolls[1];
+  }
+
+  getOneRollBonus() {
+    return this.rolls[0];
   }
 
   isSpare() {
@@ -68,6 +74,10 @@ export class LastFrame extends Frame {
     const sumOfRolls = sum(this.rolls);
 
     return sumOfRolls;
+  }
+
+  getTwoRollsBonus({}: { nextFrame: undefined }) {
+    return this.rolls[0] + this.rolls[1];
   }
 }
 
