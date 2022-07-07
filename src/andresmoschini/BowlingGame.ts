@@ -6,19 +6,9 @@ const FRAMES_COUNT = 10;
 abstract class Frame {
   protected rolls: number[] = [];
 
-  abstract getScore({
-    nextFrame,
-    nextNextFrame,
-  }: {
-    nextFrame: Frame | undefined;
-    nextNextFrame: Frame | undefined;
-  }): number;
+  abstract getScore(): number;
 
-  abstract getTwoRollsBonus({
-    nextFrame,
-  }: {
-    nextFrame: Frame | undefined;
-  }): number;
+  abstract getTwoRollsBonus(): number;
 
   getOneRollBonus() {
     return this.rolls[0];
@@ -45,34 +35,28 @@ abstract class Frame {
 }
 
 export class StandardFrame extends Frame {
-  constructor() {
+  constructor(private nextFrame: Frame) {
     super();
   }
 
-  getScore({
-    nextFrame,
-    nextNextFrame,
-  }: {
-    nextFrame: Frame;
-    nextNextFrame: Frame | undefined;
-  }) {
+  getScore() {
     if (!this.isComplete()) {
       throw new Error("frame is not complete");
     }
     const sumOfRolls = sum(this.rolls);
 
     const bonus = this.isStrike()
-      ? nextFrame.getTwoRollsBonus({ nextFrame: nextNextFrame })
+      ? this.nextFrame.getTwoRollsBonus()
       : this.isSpare()
-      ? nextFrame.getOneRollBonus()
+      ? this.nextFrame.getOneRollBonus()
       : 0;
 
     return sumOfRolls + bonus;
   }
 
-  getTwoRollsBonus({ nextFrame }: { nextFrame: Frame | undefined }) {
+  getTwoRollsBonus() {
     return this.isStrike()
-      ? PINES_COUNT + nextFrame!.getOneRollBonus()
+      ? PINES_COUNT + this.nextFrame.getOneRollBonus()
       : this.rolls[0] + this.rolls[1];
   }
 
@@ -105,10 +89,16 @@ export class LastFrame extends Frame {
 
 export class BowlingGame {
   private currentFrameIndex = 0;
-  private frames = [
-    ...createCollection(FRAMES_COUNT - 1, () => new StandardFrame()),
-    new LastFrame(),
-  ];
+  private frames: Frame[] = [];
+
+  constructor() {
+    let nextFrame = new LastFrame();
+    this.frames.unshift(nextFrame);
+    for (let i = 0; i < FRAMES_COUNT - 1; i++) {
+      nextFrame = new StandardFrame(nextFrame);
+      this.frames.unshift(nextFrame);
+    }
+  }
 
   roll(pins: number) {
     if (this.currentFrameIndex >= FRAMES_COUNT) {
@@ -128,14 +118,6 @@ export class BowlingGame {
       throw new Error("game is not complete");
     }
 
-    let score = 0;
-    for (let i = 0; i < FRAMES_COUNT; i++) {
-      const frame = this.frames[i];
-      const nextFrame = this.frames[i + 1];
-      const nextNextFrame = this.frames[i + 2];
-      score += frame.getScore({ nextFrame, nextNextFrame });
-    }
-
-    return score;
+    return sum(this.frames.map((frame) => frame.getScore()));
   }
 }

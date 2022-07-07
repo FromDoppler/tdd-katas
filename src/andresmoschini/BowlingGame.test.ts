@@ -1,4 +1,4 @@
-import { BowlingGame, StandardFrame } from "./BowlingGame";
+import { BowlingGame, LastFrame, StandardFrame } from "./BowlingGame";
 
 describe(BowlingGame.name, () => {
   it.each([{ functionName: "roll" }, { functionName: "getScore" }])(
@@ -173,7 +173,7 @@ describe(StandardFrame.name, () => {
     "should have $functionName function defined",
     ({ functionName }) => {
       // Arrange
-      const sut = new StandardFrame();
+      const sut = new StandardFrame(new LastFrame());
 
       // Assert
       expect(sut).toHaveProperty(functionName);
@@ -196,16 +196,13 @@ describe(StandardFrame.name, () => {
     "getScore() should calculate the right score for a valid frame ($description)",
     ({ rolls, expectedScore }) => {
       // Arrange
-      const frame = new StandardFrame();
+      const frame = new StandardFrame(new LastFrame());
       for (const roll of rolls) {
         frame.roll(roll);
       }
 
       // Act
-      const score = frame.getScore({
-        nextFrame: new StandardFrame(),
-        nextNextFrame: undefined,
-      });
+      const score = frame.getScore();
 
       // Assert
       expect(score).toBe(expectedScore);
@@ -225,17 +222,13 @@ describe(StandardFrame.name, () => {
     "getScore() should require a complete frame ($description)",
     ({ rolls }) => {
       // Arrange
-      const frame = new StandardFrame();
+      const frame = new StandardFrame(new LastFrame());
       for (const roll of rolls) {
         frame.roll(roll);
       }
 
       // Act
-      const act = () =>
-        frame.getScore({
-          nextFrame: new StandardFrame(),
-          nextNextFrame: undefined,
-        });
+      const act = () => frame.getScore();
 
       // Assert
       expect(act).toThrowError(/frame is not complete/i);
@@ -249,7 +242,7 @@ describe(StandardFrame.name, () => {
     },
   ])("roll() should fail in a complete frame ($description)", ({ rolls }) => {
     // Arrange
-    const frame = new StandardFrame();
+    const frame = new StandardFrame(new LastFrame());
     const lastRoll = rolls.pop()!;
 
     for (const roll of rolls) {
