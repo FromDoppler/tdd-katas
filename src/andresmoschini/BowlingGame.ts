@@ -6,11 +6,20 @@ const FRAMES_COUNT = 10;
 export class Frame {
   rolls: number[] = [];
 
-  getScore() {
+  getScore({ nextFrame }: { nextFrame: Frame | undefined }) {
     if (!this.isComplete()) {
       throw new Error("frame is not complete");
     }
-    return sum(this.rolls);
+    const sumOfRolls = sum(this.rolls);
+
+    // TODO: encapsulate nextframe rolls
+    const bonus = this.isSpare() ? nextFrame!.rolls[0] : 0;
+
+    return sumOfRolls + bonus;
+  }
+
+  isSpare() {
+    return this.rolls.length === 2 && sum(this.rolls) === PINES_COUNT;
   }
 
   isStrike() {
@@ -50,6 +59,14 @@ export class BowlingGame {
     if (this.currentFrameIndex < FRAMES_COUNT) {
       throw new Error("game is not complete");
     }
-    return sum(this.frames.map((frame) => frame.getScore()));
+
+    let score = 0;
+    for (let i = 0; i < FRAMES_COUNT; i++) {
+      const frame = this.frames[i];
+      const nextFrame = this.frames[i + 1];
+      score += frame.getScore({ nextFrame });
+    }
+
+    return score;
   }
 }

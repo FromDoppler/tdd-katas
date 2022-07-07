@@ -25,6 +25,12 @@ describe(BowlingGame.name, () => {
       expectedScore: 20,
     },
     {
+      description: "game with a spare",
+      rolls: [4, 6, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      //      ^^^^ spare
+      expectedScore: 13,
+    },
+    {
       description: "game with a strike",
       rolls: [10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       //      ^^ strike
@@ -56,6 +62,7 @@ describe(BowlingGame.name, () => {
       const score = game.getScore();
 
       // Assert
+      // expect(game).toBe({});
       expect(score).toBe(expectedScore);
     }
   );
@@ -142,7 +149,7 @@ describe(Frame.name, () => {
       }
 
       // Act
-      const score = frame.getScore();
+      const score = frame.getScore({ nextFrame: undefined });
 
       // Assert
       expect(score).toBe(expectedScore);
@@ -168,7 +175,7 @@ describe(Frame.name, () => {
       }
 
       // Act
-      const act = () => frame.getScore();
+      const act = () => frame.getScore({ nextFrame: undefined });
 
       // Assert
       expect(act).toThrowError(/frame is not complete/i);
