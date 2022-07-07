@@ -3,8 +3,51 @@ import { createCollection, sum } from "./utils";
 const PINES_COUNT = 10;
 const FRAMES_COUNT = 10;
 
-export class Frame {
+abstract class Frame {
   rolls: number[] = [];
+
+  abstract getScore({
+    nextFrame,
+    nextNextFrame,
+  }: {
+    nextFrame: Frame | undefined;
+    nextNextFrame: Frame | undefined;
+  }): number;
+
+  abstract getTwoRollsBonus({
+    nextFrame,
+  }: {
+    nextFrame: Frame | undefined;
+  }): number;
+
+  getOneRollBonus() {
+    return this.rolls[0];
+  }
+
+  abstract isComplete(): boolean;
+
+  isSpare() {
+    return (
+      this.rolls.length >= 2 && this.rolls[0] + this.rolls[1] === PINES_COUNT
+    );
+  }
+
+  isStrike() {
+    return this.rolls.length >= 1 && this.rolls[0] === PINES_COUNT;
+  }
+
+  roll(roll: number) {
+    if (this.isComplete()) {
+      throw new Error("frame is complete");
+    }
+    this.rolls.push(roll);
+  }
+}
+
+export class StandardFrame extends Frame {
+  constructor() {
+    super();
+  }
 
   getScore({
     nextFrame,
@@ -33,29 +76,8 @@ export class Frame {
       : this.rolls[0] + this.rolls[1];
   }
 
-  getOneRollBonus() {
-    return this.rolls[0];
-  }
-
-  isSpare() {
-    return (
-      this.rolls.length >= 2 && this.rolls[0] + this.rolls[1] === PINES_COUNT
-    );
-  }
-
-  isStrike() {
-    return this.rolls.length >= 1 && this.rolls[0] === PINES_COUNT;
-  }
-
   isComplete() {
     return this.isStrike() || this.rolls.length === 2;
-  }
-
-  roll(roll: number) {
-    if (this.isComplete()) {
-      throw new Error("frame is complete");
-    }
-    this.rolls.push(roll);
   }
 }
 
@@ -76,7 +98,7 @@ export class LastFrame extends Frame {
     return sumOfRolls;
   }
 
-  getTwoRollsBonus({}: { nextFrame: undefined }) {
+  getTwoRollsBonus() {
     return this.rolls[0] + this.rolls[1];
   }
 }
@@ -84,7 +106,7 @@ export class LastFrame extends Frame {
 export class BowlingGame {
   private currentFrameIndex = 0;
   private frames = [
-    ...createCollection(FRAMES_COUNT - 1, () => new Frame()),
+    ...createCollection(FRAMES_COUNT - 1, () => new StandardFrame()),
     new LastFrame(),
   ];
 
