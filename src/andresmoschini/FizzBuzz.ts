@@ -1,5 +1,7 @@
+import { range } from "./utils";
+
 export class FizzBuzz {
   generate(): string[] {
-    throw new Error("Not implemented");
+    return range(100, 1).map((i) => i.toString());
   }
 }
