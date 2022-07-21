@@ -27,6 +27,15 @@ describe("FizzBuzz.generate", () => {
 
   it.each([
     { position: 1, expectedValue: "1" },
+    { position: 3, expectedValue: "Fizz" },
+    { position: 6, expectedValue: "Fizz" },
+    { position: 9, expectedValue: "Fizz" },
+    { position: 12, expectedValue: "Fizz" },
+    { position: 15, expectedValue: "Fizz" },
+    { position: 18, expectedValue: "Fizz" },
+    { position: 19, expectedValue: "19" },
+    { position: 98, expectedValue: "98" },
+    { position: 99, expectedValue: "Fizz" },
     { position: 100, expectedValue: "100" },
   ])(
     "should return $expectedValue in the $position position",
