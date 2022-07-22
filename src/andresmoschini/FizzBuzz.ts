@@ -11,7 +11,13 @@ export class FizzBuzz {
 
   generate(): string[] {
     return range(this.end - this.start + 1, this.start).map((i) =>
-      i % 15 == 0
+      i % 77 == 0
+        ? "FooBoo"
+        : i % 11 == 0
+        ? "Boo"
+        : i % 7 == 0
+        ? "Foo"
+        : i % 15 == 0
         ? "FizzBuzz"
         : i % 5 == 0
         ? "Buzz"
