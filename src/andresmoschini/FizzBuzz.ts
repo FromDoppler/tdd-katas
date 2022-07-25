@@ -2,6 +2,10 @@ import { range } from "./utils";
 
 const DEFAULT_WORDS_BY_FACTOR = [
   { factor: 77, word: "FooBoo" },
+  { factor: 55, word: "BuzzBoo" },
+  { factor: 35, word: "BuzzFoo" },
+  { factor: 33, word: "FizzBoo" },
+  { factor: 21, word: "FizzFoo" },
   { factor: 15, word: "FizzBuzz" },
   { factor: 11, word: "Boo" },
   { factor: 7, word: "Foo" },
