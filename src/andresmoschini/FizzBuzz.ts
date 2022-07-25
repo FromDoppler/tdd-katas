@@ -13,9 +13,9 @@ export class FizzBuzz {
   private readonly start: number;
   private readonly end: number;
 
-  constructor(options: { start?: number; end?: number } = {}) {
-    this.start = options.start || 1;
-    this.end = options.end || 100;
+  constructor({ start = 1, end = 100 }: { start?: number; end?: number } = {}) {
+    this.start = start;
+    this.end = end;
   }
 
   generate(): string[] {
