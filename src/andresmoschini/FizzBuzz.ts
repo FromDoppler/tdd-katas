@@ -1,6 +1,8 @@
 import { range } from "./utils";
 
-const DEFAULT_WORDS_BY_FACTOR = [
+type FactorWordPair = { readonly factor: number; readonly word: string };
+
+const DEFAULT_WORDS_BY_FACTOR: readonly FactorWordPair[] = [
   { factor: 3, word: "Fizz" },
   { factor: 5, word: "Buzz" },
   { factor: 7, word: "Foo" },
