@@ -1,5 +1,14 @@
 import { range } from "./utils";
 
+const DEFAULT_WORDS_BY_FACTOR = [
+  { factor: 77, word: "FooBoo" },
+  { factor: 15, word: "FizzBuzz" },
+  { factor: 11, word: "Boo" },
+  { factor: 7, word: "Foo" },
+  { factor: 5, word: "Buzz" },
+  { factor: 3, word: "Fizz" },
+] as const;
+
 export class FizzBuzz {
   private readonly start: number;
   private readonly end: number;
@@ -10,20 +19,10 @@ export class FizzBuzz {
   }
 
   generate(): string[] {
-    return range(this.end - this.start + 1, this.start).map((i) =>
-      i % 77 == 0
-        ? "FooBoo"
-        : i % 11 == 0
-        ? "Boo"
-        : i % 7 == 0
-        ? "Foo"
-        : i % 15 == 0
-        ? "FizzBuzz"
-        : i % 5 == 0
-        ? "Buzz"
-        : i % 3 == 0
-        ? "Fizz"
-        : i.toString()
+    return range(this.end - this.start + 1, this.start).map(
+      (i) =>
+        DEFAULT_WORDS_BY_FACTOR.find((x) => i % x.factor === 0)?.word ??
+        i.toString()
     );
   }
 }
