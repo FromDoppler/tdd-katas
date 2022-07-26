@@ -1,4 +1,4 @@
-import { FizzBuzz } from "./FizzBuzz";
+import { DEFAULT_FACTOR_RULES, FizzBuzz } from "./FizzBuzz";
 
 describe("FizzBuzz.generate", () => {
   it("should be defined as function", () => {
@@ -127,6 +127,54 @@ describe("FizzBuzz.generate", () => {
     ({ position, expectedValue }) => {
       // Arrange
       const sut = new FizzBuzz();
+
+      // Act
+      const result = sut.generate();
+
+      // Assert
+      expect(result[position - 1]).toBe(expectedValue);
+    }
+  );
+
+  it.each([
+    { position: 1, expectedValue: "1" },
+    { position: 16, expectedValue: "16" },
+    { position: 17, expectedValue: "17" },
+    { position: 18, expectedValue: "Buzz" },
+    { position: 19, expectedValue: "19" },
+    { position: 20, expectedValue: "Fizz" },
+    { position: 21, expectedValue: "BuzzFoo" },
+    { position: 22, expectedValue: "Boo" },
+    { position: 24, expectedValue: "Buzz" },
+    { position: 30, expectedValue: "BuzzFizz" },
+    { position: 45, expectedValue: "BuzzFizz" },
+    { position: 77, expectedValue: "FooBoo" },
+    { position: 83, expectedValue: "83" },
+    { position: 84, expectedValue: "BuzzFoo" },
+    { position: 85, expectedValue: "Fizz" },
+    { position: 88, expectedValue: "Boo" },
+    { position: 90, expectedValue: "BuzzFizz" },
+    { position: 95, expectedValue: "Fizz" },
+    { position: 100, expectedValue: "Fizz" },
+  ])(
+    "should return $expectedValue in the $position position when fizz buzz rules are overridden",
+    ({ position, expectedValue }) => {
+      // Arrange
+      const newRules = [...DEFAULT_FACTOR_RULES];
+      const fizzRuleIndex = newRules.findIndex((rule) => rule.word === "Fizz");
+      const buzzRuleIndex = newRules.findIndex((rule) => rule.word === "Buzz");
+      newRules[fizzRuleIndex] = {
+        ...newRules[fizzRuleIndex],
+        word: "Buzz",
+      };
+      newRules[buzzRuleIndex] = {
+        ...newRules[buzzRuleIndex],
+        word: "Fizz",
+      };
+
+      const sut = new FizzBuzz({
+        factorRules: newRules,
+      });
 
       // Act
       const result = sut.generate();
