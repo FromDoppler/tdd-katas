@@ -1,8 +1,8 @@
 import { range } from "./utils";
 
-type FactorWordPair = { readonly factor: number; readonly word: string };
+type FactorRule = { readonly factor: number; readonly word: string };
 
-const DEFAULT_WORDS_BY_FACTOR: readonly FactorWordPair[] = [
+const DEFAULT_FACTOR_RULES: readonly FactorRule[] = [
   { factor: 3, word: "Fizz" },
   { factor: 5, word: "Buzz" },
   { factor: 7, word: "Foo" },
@@ -20,7 +20,7 @@ export class FizzBuzz {
 
   generate(): string[] {
     return range(this.end - this.start + 1, this.start).map((i) => {
-      const word = DEFAULT_WORDS_BY_FACTOR.filter((x) => i % x.factor === 0)
+      const word = DEFAULT_FACTOR_RULES.filter((x) => i % x.factor === 0)
         .map((x) => x.word)
         .join("");
       return word ? word : i.toString();
