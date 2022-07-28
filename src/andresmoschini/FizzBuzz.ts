@@ -9,6 +9,9 @@ export const DEFAULT_FACTOR_RULES: readonly FactorRule[] = [
   { factor: 11, word: "Boo" },
 ] as const;
 
+export const BUZZ_FIZZ_FACTOR_RULES: readonly FactorRule[] =
+  generateBuzzFizzRules();
+
 export class FizzBuzz {
   private readonly start: number;
   private readonly end: number;
@@ -37,4 +40,18 @@ export class FizzBuzz {
       return word ? word : i.toString();
     });
   }
+}
+function generateBuzzFizzRules() {
+  const newRules = [...DEFAULT_FACTOR_RULES];
+  const fizzRuleIndex = newRules.findIndex((rule) => rule.word === "Fizz");
+  const buzzRuleIndex = newRules.findIndex((rule) => rule.word === "Buzz");
+  newRules[fizzRuleIndex] = {
+    ...newRules[fizzRuleIndex],
+    word: "Buzz",
+  };
+  newRules[buzzRuleIndex] = {
+    ...newRules[buzzRuleIndex],
+    word: "Fizz",
+  };
+  return newRules;
 }

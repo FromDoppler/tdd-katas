@@ -1,4 +1,4 @@
-import { DEFAULT_FACTOR_RULES, FizzBuzz } from "./FizzBuzz";
+import { BUZZ_FIZZ_FACTOR_RULES, FizzBuzz } from "./FizzBuzz";
 
 describe("FizzBuzz.generate", () => {
   it("should be defined as function", () => {
@@ -160,20 +160,8 @@ describe("FizzBuzz.generate", () => {
     "should return $expectedValue in the $position position when fizz buzz rules are overridden",
     ({ position, expectedValue }) => {
       // Arrange
-      const newRules = [...DEFAULT_FACTOR_RULES];
-      const fizzRuleIndex = newRules.findIndex((rule) => rule.word === "Fizz");
-      const buzzRuleIndex = newRules.findIndex((rule) => rule.word === "Buzz");
-      newRules[fizzRuleIndex] = {
-        ...newRules[fizzRuleIndex],
-        word: "Buzz",
-      };
-      newRules[buzzRuleIndex] = {
-        ...newRules[buzzRuleIndex],
-        word: "Fizz",
-      };
-
       const sut = new FizzBuzz({
-        factorRules: newRules,
+        factorRules: BUZZ_FIZZ_FACTOR_RULES,
       });
 
       // Act
