@@ -1,4 +1,8 @@
-import { BUZZ_FIZZ_FACTOR_RULES, FizzBuzz } from "./FizzBuzz";
+import {
+  BUZZ_FIZZ_FACTOR_RULES,
+  FizzBuzz,
+  NEW_SMALL_BIG_RULES,
+} from "./FizzBuzz";
 
 describe("FizzBuzz.generate", () => {
   it("should be defined as function", () => {
@@ -163,6 +167,37 @@ describe("FizzBuzz.generate", () => {
       const sut = new FizzBuzz({
         factorRules: BUZZ_FIZZ_FACTOR_RULES,
       });
+
+      // Act
+      const result = sut.generate();
+
+      // Assert
+      expect(result[position - 1]).toBe(expectedValue);
+    }
+  );
+
+  it.each([
+    { position: 1, expectedValue: "small" },
+    { position: 3, expectedValue: "small" },
+    { position: 14, expectedValue: "small" },
+    { position: 15, expectedValue: "small" },
+    { position: 16, expectedValue: "16" },
+    { position: 18, expectedValue: "Fizz" },
+    { position: 19, expectedValue: "19" },
+    { position: 30, expectedValue: "FizzBuzz" },
+    { position: 70, expectedValue: "BuzzFoo" },
+    { position: 84, expectedValue: "FizzFoo" },
+    { position: 90, expectedValue: "FizzBuzz" },
+    { position: 95, expectedValue: "Buzz" },
+    { position: 96, expectedValue: "big" },
+    { position: 97, expectedValue: "big" },
+    { position: 99, expectedValue: "big" },
+    { position: 100, expectedValue: "big" },
+  ])(
+    "should return $expectedValue in the $position position when small/big rules are overridden",
+    ({ position, expectedValue }) => {
+      // Arrange
+      const sut = new FizzBuzz({ predicateRules: NEW_SMALL_BIG_RULES });
 
       // Act
       const result = sut.generate();
