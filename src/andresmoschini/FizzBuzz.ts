@@ -21,6 +21,11 @@ export const NEW_SMALL_BIG_RULES: readonly PredicateRule[] = [
   { predicate: (value) => value > 95, word: "big" },
 ];
 
+export const FTW_GG_RULES: readonly PredicateRule[] = [
+  { predicate: (value) => value % 5 === 0 && value % 3 === 0, word: "FTW" },
+  { predicate: (value) => value % 5 === 0 || value % 3 === 0, word: "GG" },
+];
+
 export class FizzBuzz {
   private readonly start: number;
   private readonly end: number;

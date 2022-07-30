@@ -1,6 +1,7 @@
 import {
   BUZZ_FIZZ_FACTOR_RULES,
   FizzBuzz,
+  FTW_GG_RULES,
   NEW_SMALL_BIG_RULES,
 } from "./FizzBuzz";
 
@@ -198,6 +199,37 @@ describe("FizzBuzz.generate", () => {
     ({ position, expectedValue }) => {
       // Arrange
       const sut = new FizzBuzz({ predicateRules: NEW_SMALL_BIG_RULES });
+
+      // Act
+      const result = sut.generate();
+
+      // Assert
+      expect(result[position - 1]).toBe(expectedValue);
+    }
+  );
+
+  it.each([
+    { position: 1, expectedValue: "1" },
+    { position: 3, expectedValue: "GG" },
+    { position: 14, expectedValue: "Foo" },
+    { position: 15, expectedValue: "FTW" },
+    { position: 16, expectedValue: "16" },
+    { position: 18, expectedValue: "GG" },
+    { position: 19, expectedValue: "19" },
+    { position: 30, expectedValue: "FTW" },
+    { position: 70, expectedValue: "GG" },
+    { position: 84, expectedValue: "GG" },
+    { position: 90, expectedValue: "FTW" },
+    { position: 95, expectedValue: "GG" },
+    { position: 96, expectedValue: "GG" },
+    { position: 97, expectedValue: "97" },
+    { position: 99, expectedValue: "GG" },
+    { position: 100, expectedValue: "GG" },
+  ])(
+    "should return $expectedValue in the $position position when FTW/GG rules are overridden",
+    ({ position, expectedValue }) => {
+      // Arrange
+      const sut = new FizzBuzz({ predicateRules: FTW_GG_RULES });
 
       // Act
       const result = sut.generate();
