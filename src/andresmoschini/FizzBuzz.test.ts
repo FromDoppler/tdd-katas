@@ -1,5 +1,6 @@
 import {
   BUZZ_FIZZ_FACTOR_RULES,
+  DEFAULT_FACTOR_RULES,
   FizzBuzz,
   FTW_GG_RULES,
   NEW_SMALL_BIG_RULES,
@@ -166,7 +167,7 @@ describe("FizzBuzz.generate", () => {
     ({ position, expectedValue }) => {
       // Arrange
       const sut = new FizzBuzz({
-        factorRules: BUZZ_FIZZ_FACTOR_RULES,
+        rules: [...BUZZ_FIZZ_FACTOR_RULES, ...DEFAULT_FACTOR_RULES],
       });
 
       // Act
@@ -198,7 +199,9 @@ describe("FizzBuzz.generate", () => {
     "should return $expectedValue in the $position position when small/big rules are overridden",
     ({ position, expectedValue }) => {
       // Arrange
-      const sut = new FizzBuzz({ predicateRules: NEW_SMALL_BIG_RULES });
+      const sut = new FizzBuzz({
+        rules: [...NEW_SMALL_BIG_RULES, ...DEFAULT_FACTOR_RULES],
+      });
 
       // Act
       const result = sut.generate();
@@ -229,7 +232,9 @@ describe("FizzBuzz.generate", () => {
     "should return $expectedValue in the $position position when FTW/GG rules are overridden",
     ({ position, expectedValue }) => {
       // Arrange
-      const sut = new FizzBuzz({ predicateRules: FTW_GG_RULES });
+      const sut = new FizzBuzz({
+        rules: [...FTW_GG_RULES, ...DEFAULT_FACTOR_RULES],
+      });
 
       // Act
       const result = sut.generate();
