@@ -32,13 +32,13 @@ export class FizzBuzz {
   }
 
   generate(): string[] {
-    return range(this.end - this.start + 1, this.start).map((i) => {
-      const word = this.factorRules
-        .filter((x) => i % x.factor === 0)
-        .map((x) => x.word)
-        .join("");
-      return word ? word : i.toString();
-    });
+    return range(this.end - this.start + 1, this.start).map(
+      (i) =>
+        this.factorRules
+          .filter((x) => i % x.factor === 0)
+          .map((x) => x.word)
+          .join("") || i.toString()
+    );
   }
 }
 function generateBuzzFizzRules() {
