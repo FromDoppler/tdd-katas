@@ -22,7 +22,7 @@ indent_size = unset
 max_line_length = unset
 
 # Unset for binary and generated files
-[{**.svg,**.png,**/obj/**,**/bin/**,.vscode/**,**/Properties/launchSettings.json,yarn.lock,.doppler-ci,build/**,LICENSE}]
+[{**.svg,**.png,**/obj/**,**/bin/**,.vscode/**,**/Properties/launchSettings.json,yarn.lock,.doppler-ci,*.groovy,build/**,LICENSE}]
 charset = unset
 end_of_line = unset
 insert_final_newline = unset
