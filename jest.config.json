@@ -1,0 +1,20 @@
+{
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "jsx",
+    "ts",
+    "tsx",
+    "node",
+    "cjs"
+  ],
+  "testEnvironment": "jest-environment-node",
+  "preset": "ts-jest",
+  "roots": [
+    "<rootDir>/src"
+  ],
+  "prettierPath": null,
+  "setupFilesAfterEnv": [
+    "<rootDir>/src/setupTests.ts"
+  ]
+}

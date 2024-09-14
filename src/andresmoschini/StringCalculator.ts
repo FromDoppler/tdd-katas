@@ -43,7 +43,7 @@ export class StringCalculator {
   }
 
   private static splitSeparatorsAndData(input: string) {
-    const [_, separator, data] = /^(?:\/\/([^\n]+)\n)?(.*)$/s.exec(input);
+    const [_, separator, data] = /^(?:\/\/([^\n]+)\n)?(.*)$/s.exec(input)!;
     return separator ? { separators: [separator], data } : { data };
   }
 

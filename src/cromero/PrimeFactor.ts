@@ -1,4 +1,4 @@
-export const generate = (integer: number, current = []): number[] => {
+export const generate = (integer: number, current: number[] = []): number[] => {
   if (integer === 1) {
     return current;
   }
@@ -13,7 +13,7 @@ export const generate = (integer: number, current = []): number[] => {
   return generate(residue, [...current, currentDivider]);
 };
 
-const getDividers = (integer): number[] => {
+const getDividers = (integer: number): number[] => {
   const dividers = [];
 
   for (let i = 1; i <= integer; i++) {

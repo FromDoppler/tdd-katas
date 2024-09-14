@@ -39,7 +39,7 @@ describe("StringCalculator.add", () => {
 
   it.each([
     { input: {}, message: "not parsable values: [object Object]" },
-    { input: () => {}, message: "not parsable values: () => {}" },
+    { input: () => {}, message: "not parsable values: () => { }" },
     { input: true, message: "not parsable values: true" },
     { input: null, message: "not parsable values: " },
     { input: undefined, message: "not parsable values: " },

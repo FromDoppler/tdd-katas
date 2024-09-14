@@ -2,35 +2,26 @@
   "name": "tdd-katas",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.1.1",
-    "@testing-library/user-event": "^14.1.1",
-    "@types/jest": "^27.4.1",
-    "@types/node": "^17.0.27",
-    "@types/react": "^18.0.7",
-    "@types/react-dom": "^18.0.0",
-    "eclint": "^2.8.1",
-    "prettier": "^2.6.2",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-scripts": "^5.0.1",
-    "typescript": "^4.6.3"
+  "devDependencies": {
+    "@testing-library/jest-dom": "6.5.0",
+    "@types/jest": "29.5.13",
+    "@types/node": "22.5.4",
+    "eclint": "2.8.1",
+    "jest": "29.7.0",
+    "jest-environment-jsdom": "29.7.0",
+    "prettier": "3.3.3",
+    "typescript": "5.6.2",
+    "ts-jest": "29.2.5"
   },
   "scripts": {
-    "verify-format": "yarn prettier-check && yarn eclint-check",
-    "fix-format": "yarn prettier-fix && yarn eclint-fix",
+    "verify-format": "npm run prettier-check && npm run eclint-check",
+    "fix-format": "npm run prettier-fix && npm run eclint-fix",
     "eclint-fix": "eclint fix",
     "eclint-check": "eclint check",
     "prettier-fix": "prettier --write \"**/**\"",
     "prettier-check": "prettier --check \"**/**\"",
-    "test": "react-scripts test"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "test": "jest",
+    "test:watch": "jest --watchAll"
   },
   "browserslist": {
     "production": [
