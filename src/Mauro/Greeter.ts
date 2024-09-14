@@ -1,10 +1,11 @@
 export class Greeter {
   _getCurrentTime;
-  constructor(currentTime: any) {
+
+  constructor(currentTime) {
     this._getCurrentTime = currentTime;
   }
 
-  greet(name: any) {
+  greet(name) {
     const trimmedName = name.trim();
     const firstCapitalizedLetter = trimmedName.charAt(0).toUpperCase();
     const restTrimmedName = trimmedName.slice(1);

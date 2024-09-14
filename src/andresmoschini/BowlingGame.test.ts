@@ -1,7 +1,7 @@
 import { BowlingGame, LastFrame, StandardFrame } from "./BowlingGame";
 
 describe(BowlingGame.name, () => {
-  it.each([{ functionName: "roll" }, { functionName: "getScore" }] as const)(
+  it.each([{ functionName: "roll" }, { functionName: "getScore" }])(
     "should have $functionName function defined",
     ({ functionName }) => {
       // Arrange
@@ -169,7 +169,7 @@ describe(BowlingGame.name, () => {
 });
 
 describe(StandardFrame.name, () => {
-  it.each([{ functionName: "roll" }, { functionName: "getScore" }] as const)(
+  it.each([{ functionName: "roll" }, { functionName: "getScore" }])(
     "should have $functionName function defined",
     ({ functionName }) => {
       // Arrange
