@@ -1,30 +1,35 @@
-# tdd-katas
+# TDD Katas
 
-Based on <https://github.com/wix/tdd-katas>
+Basado en <https://github.com/wix/tdd-katas>
 
-## The Three Rules of TDD
+## Las Tres Reglas del TDD
 
-1. You are not allowed to write any production code unless it is to make a failing unit test pass.
-2. You are not allowed to write any more of a unit test than is sufficient to fail; and compilation failures are failures.
-3. You are not allowed to write any more production code than is sufficient to pass the one failing unit test.
+1. No está permitido escribir ningún código de producción a menos que sea para hacer pasar una prueba unitaria que falla.
+2. No está permitido escribir más de una prueba unitaria que lo necesario para que falle; y los fallos de compilación son fallos.
+3. No está permitido escribir más código de producción del necesario para hacer pasar una única prueba unitaria que falla.
 
-Which means the workflow is:
+Lo que significa que el flujo de trabajo es:
 
-1. Write a failing test. Stop writing the test as soon as it fails.
-2. Write the minimal production code required for the test to pass. Stop writing any code once the test passes.
-3. Refactor the test code and the production code without altering the functionality. All tests should pass.
+1. Escribe una prueba que falle. Deja de escribir la prueba tan pronto como falle.
+2. Escribe el código de producción mínimo necesario para que la prueba pase. Deja de escribir cualquier código una vez que la prueba pase.
+3. Refactoriza el código de la prueba y el código de producción sin alterar la funcionalidad. Todas las pruebas deben pasar.
 
-## Usage
+## Uso
 
-To run the tests, run `yarn test`.
+Para ejecutar las pruebas, ejecuta `npm test` o `npm run test:watch` para ejecutarlas continuamente.
 
-### How to participate
+Se requiere Node v20.17.0 y ejecutar `npm install` previamente.
 
-1. Clone the repository
-2. Copy the folder `_copy_me` to a new folder with your name
-3. Complete the kata with a commit for each step
-4. Create a pull request to discuss
-5. Merge
+Como alternativa, puede utilizarse Docker con el comando `docker build --progress=plain .`.
+
+### Como participar
+
+1. Clona el repositorio
+2. Copia la carpeta `_copy_me` a una nueva carpeta con tu nombre
+3. Por cada kata que desees hacer
+   1. Completa el kata con un commit por cada paso
+   2. Crea un pull request para revisar tu aproximación
+   3. Haz el merge
 
 ## Katas
 
@@ -94,7 +99,7 @@ in the string.
 
 Made popular by [Uncle Bob](http://butunclebob.com/ArticleS.UncleBob.ThePrimeFactorsKata).
 
-This kata demonstrates the [`transformation priority premise`](https://en.wikipedia.org/wiki/Transformation_Priority_Premise).
+This kata demonstrates the _Transformation Priority Premise_ (Ver más en [Wikipedia](https://en.wikipedia.org/wiki/Transformation_Priority_Premise) o [Uncle Bob's site](https://blog.cleancoder.com/uncle-bob/2013/05/27/TheTransformationPriorityPremise.html)).
 
 Write a function `generate` under a module `PrimeFactors` that, given an integer, returns the list
 containing the prime factors in numerical sequence.
