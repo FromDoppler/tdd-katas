@@ -146,3 +146,19 @@ exploration of different approaches.
 - Add ability to change rules for initial requirement, instead of "Fizz" (multiples of 3) return "Buzz", and instead of
   "Buzz" (multiples of 5) return "Fizz"
 - Add new rule for "multiples of 3 and 5" return "FTW", and for "multiples of 3 or 5" return "GG"
+
+### Diamond
+
+From [Ploeh's Blog](https://blog.ploeh.dk/2015/01/10/diamond-kata-with-fscheck/) (and others before him)
+
+Given a letter, print a diamond starting with 'A' with the supplied letter at the widest point.
+
+For example: print-diamond 'C' prints
+
+```
+  A
+ B B
+C   C
+ B B
+  A
+```
