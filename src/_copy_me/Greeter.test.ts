@@ -1,7 +1,7 @@
 import { Greeter } from "./Greeter";
 
-describe("Greeter.greet", () => {
-  it("should return a message with Hello name", () => {
+describe(Greeter, () => {
+  it("should return a message with 'Hello {name}'", () => {
     // arrange
     const greeter = new Greeter();
 
