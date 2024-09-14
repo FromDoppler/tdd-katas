@@ -14,7 +14,7 @@ export class StringCalculator {
 
     return this.ignoreGreaterThan(1000, parsedInput).reduce(
       (sum, number) => sum + number,
-      0
+      0,
     );
   }
 

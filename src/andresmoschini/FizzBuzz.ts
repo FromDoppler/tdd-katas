@@ -62,7 +62,7 @@ export class FizzBuzz {
 
   generate(): string[] {
     return range(this.end - this.start + 1, this.start).map(
-      (i) => this.rules.find((rule) => rule.predicate(i))?.word || i.toString()
+      (i) => this.rules.find((rule) => rule.predicate(i))?.word || i.toString(),
     );
   }
 }

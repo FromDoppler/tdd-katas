@@ -10,7 +10,7 @@ describe(BowlingGame.name, () => {
       // Assert
       expect(sut).toHaveProperty(functionName);
       expect(sut[functionName]).toBeInstanceOf(Function);
-    }
+    },
   );
 
   test.each([
@@ -117,7 +117,7 @@ describe(BowlingGame.name, () => {
       // Assert
       // expect(game).toBe({});
       expect(score).toBe(expectedScore);
-    }
+    },
   );
 
   test.each([
@@ -143,7 +143,7 @@ describe(BowlingGame.name, () => {
 
       // Assert
       expect(act).toThrowError(/game is not complete/i);
-    }
+    },
   );
 
   test.each([
@@ -178,7 +178,7 @@ describe(StandardFrame.name, () => {
       // Assert
       expect(sut).toHaveProperty(functionName);
       expect(sut[functionName]).toBeInstanceOf(Function);
-    }
+    },
   );
 
   test.each([
@@ -206,7 +206,7 @@ describe(StandardFrame.name, () => {
 
       // Assert
       expect(score).toBe(expectedScore);
-    }
+    },
   );
 
   test.each([
@@ -232,7 +232,7 @@ describe(StandardFrame.name, () => {
 
       // Assert
       expect(act).toThrowError(/frame is not complete/i);
-    }
+    },
   );
 
   test.each([

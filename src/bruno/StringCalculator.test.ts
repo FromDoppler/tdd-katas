@@ -28,7 +28,7 @@ describe("StringCalculator", () => {
 
       // assert
       expect(result).toEqual(expected);
-    }
+    },
   );
 
   it.each([
@@ -45,7 +45,7 @@ describe("StringCalculator", () => {
 
       // assert
       expect(result).toEqual(expected);
-    }
+    },
   );
 
   it.each([
@@ -62,7 +62,7 @@ describe("StringCalculator", () => {
 
       // assert
       expect(result).toEqual(expected);
-    }
+    },
   );
 
   it.each([
@@ -80,7 +80,7 @@ describe("StringCalculator", () => {
 
       // assert
       expect(result).toEqual(expected);
-    }
+    },
   );
 
   it.each([
@@ -104,7 +104,7 @@ describe("StringCalculator", () => {
 
       // assert
       expect(() => stringCalculator.add(input)).toThrowError(expected);
-    }
+    },
   );
 
   it.each([
@@ -123,7 +123,7 @@ describe("StringCalculator", () => {
 
       // assert
       expect(result).toEqual(expected);
-    }
+    },
   );
 
   it.each([
@@ -142,6 +142,6 @@ describe("StringCalculator", () => {
 
       // assert
       expect(result).toEqual(expected);
-    }
+    },
   );
 });

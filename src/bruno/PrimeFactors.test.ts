@@ -20,7 +20,7 @@ describe("PrimeFactors", () => {
 
       // Assert
       expect(result).toEqual([input]);
-    }
+    },
   );
 
   it("should return [2,2] when input value is 4", () => {

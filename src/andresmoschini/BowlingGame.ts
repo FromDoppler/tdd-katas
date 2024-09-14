@@ -48,8 +48,8 @@ export class StandardFrame extends Frame {
     const bonus = this.isStrike()
       ? this.nextFrame.getTwoRollsBonus()
       : this.isSpare()
-      ? this.nextFrame.getOneRollBonus()
-      : 0;
+        ? this.nextFrame.getOneRollBonus()
+        : 0;
 
     return sumOfRolls + bonus;
   }

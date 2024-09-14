@@ -69,11 +69,9 @@ Made popular by [Roy Osherove](http://osherove.com/tdd-kata-1/).
 - **Do one task at a time. The trick is to learn to work incrementally.**
 - **Make sure you only test for correct inputs. there is no need to test for invalid inputs for this kata**
 
-This kata is one of the simplest and best ways to practice step-by-step fluent tdd, and provides an easy way to get
-proficient in a language.
+This kata is one of the simplest and best ways to practice step-by-step fluent tdd, and provides an easy way to get proficient in a language.
 
-Write a method `add` under an object `StringCalculator` that, given a delimited string, returns the sum of the numbers
-in the string.
+Write a method `add` under an object `StringCalculator` that, given a delimited string, returns the sum of the numbers in the string.
 
 1. An empty string returns zero `'' => 0`
 

@@ -36,7 +36,7 @@ describe("StringCalculator.add", () => {
 
     // assert
     expect(() => stringCalculator.add("-1,2,-3")).toThrow(
-      "The string contains negatives numbers"
+      "The string contains negatives numbers",
     );
   });
 

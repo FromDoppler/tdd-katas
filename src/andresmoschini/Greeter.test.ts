@@ -24,7 +24,7 @@ describe("Greeter.greet", () => {
 
       // assert
       expect(result).toBe(`Good night ${arbitraryName}`);
-    }
+    },
   );
 
   it.each([
@@ -46,7 +46,7 @@ describe("Greeter.greet", () => {
 
       // assert
       expect(result).toBe(`Good morning ${arbitraryName}`);
-    }
+    },
   );
 
   it.each([
@@ -68,7 +68,7 @@ describe("Greeter.greet", () => {
 
       // assert
       expect(result).toBe(`Hello ${arbitraryName}`);
-    }
+    },
   );
 
   it.each([
@@ -90,7 +90,7 @@ describe("Greeter.greet", () => {
 
       // assert
       expect(result).toBe(`Good evening ${arbitraryName}`);
-    }
+    },
   );
 
   it.each([
@@ -122,7 +122,7 @@ describe("Greeter.greet", () => {
 
       // assert
       expect(result).toMatch(/^Hello\s$/);
-    }
+    },
   );
 
   it.each([
@@ -145,7 +145,7 @@ describe("Greeter.greet", () => {
       // assert
       expect(result).toMatch(/^Hello\s[^a-z]\w*$/);
       expect(result).toBe(`Hello ${expectedName}`);
-    }
+    },
   );
 
   it("should log when is called", () => {

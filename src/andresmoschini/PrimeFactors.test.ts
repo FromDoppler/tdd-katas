@@ -95,6 +95,6 @@ describe(generate.name, () => {
 
       // Assert
       expect(result).toEqual(expectedResult);
-    }
+    },
   );
 });

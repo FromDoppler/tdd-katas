@@ -25,10 +25,10 @@ export class Greeter {
       currentHour >= 6 && currentHour < 12
         ? "Good morning"
         : currentHour >= 18 && currentHour < 22
-        ? "Good evening"
-        : currentHour >= 22 || currentHour < 6
-        ? "Good night"
-        : "Hello";
+          ? "Good evening"
+          : currentHour >= 22 || currentHour < 6
+            ? "Good night"
+            : "Hello";
 
     return `${greeting} ${sanitizedName}`;
   }

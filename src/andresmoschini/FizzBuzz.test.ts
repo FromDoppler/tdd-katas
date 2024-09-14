@@ -98,7 +98,7 @@ describe("FizzBuzz.generate", () => {
         expect(typeof resultItem).toBe("string");
       }
       expect(result.pop()).toBe(expectedLastItem);
-    }
+    },
   );
 
   it.each([
@@ -139,7 +139,7 @@ describe("FizzBuzz.generate", () => {
 
       // Assert
       expect(result[position - 1]).toBe(expectedValue);
-    }
+    },
   );
 
   it.each([
@@ -175,7 +175,7 @@ describe("FizzBuzz.generate", () => {
 
       // Assert
       expect(result[position - 1]).toBe(expectedValue);
-    }
+    },
   );
 
   it.each([
@@ -208,7 +208,7 @@ describe("FizzBuzz.generate", () => {
 
       // Assert
       expect(result[position - 1]).toBe(expectedValue);
-    }
+    },
   );
 
   it.each([
@@ -241,6 +241,6 @@ describe("FizzBuzz.generate", () => {
 
       // Assert
       expect(result[position - 1]).toBe(expectedValue);
-    }
+    },
   );
 });

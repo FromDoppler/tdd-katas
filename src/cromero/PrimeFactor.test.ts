@@ -17,6 +17,6 @@ describe("PrimeFactors.generate", () => {
     ({ number, expected }) => {
       const primeFactors = generate(number);
       expect(primeFactors).toEqual(expected);
-    }
+    },
   );
 });

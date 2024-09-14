@@ -8,7 +8,7 @@ export function repeat<T>(size: number, value: T) {
 
 export function createCollection<T>(
   size: number,
-  createValue: (index: number) => T
+  createValue: (index: number) => T,
 ) {
   return range(size).map(createValue);
 }
